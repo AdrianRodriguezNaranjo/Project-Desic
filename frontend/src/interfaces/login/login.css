@@ -1,0 +1,54 @@
+.background-login {
+  background-color: #00778B;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-login {
+  margin: auto;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffffff;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.passwordInput {
+  margin-top: 10px;
+}
+
+.error-mesage {
+  color: #ff4d4f;
+  margin-top: 10px;
+}
+
+.buttonLoggin {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #F2A900;
+}
+
+.question {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.signup {
+  text-align: center;
+  color: #1890ff;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.signup:hover {
+  text-decoration: underline;
+}
