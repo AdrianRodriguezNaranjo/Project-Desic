@@ -4,7 +4,7 @@ TEMPLATE = app
 DEFINES += _BUILDING_QX_BUS
 INCLUDEPATH += ../../../../../QxOrm/include/
 DESTDIR = ../../../../../QxOrm/test/_bin/
-LIBS += -L"../../../../../QxOrm/lib"
+LIBS += -L"$$PWD/../../../../lib"
 
 !contains(DEFINES, _QX_NO_PRECOMPILED_HEADER) {
 PRECOMPILED_HEADER = ./precompiled.h
@@ -28,6 +28,7 @@ LIBS += -l"QxOrm"
 } # CONFIG(debug, debug|release)
 
 SOURCES += \
+    bus_stop.cpp \
     chatserver.cpp \
     database.cpp \
     http_server.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
     schedule.cpp
 
 HEADERS += \
+    bus_stop.h \
     chatserver.h \
     database.h \
     export.h \
@@ -43,3 +45,12 @@ HEADERS += \
     line.h \
     precompiled.h \
     schedule.h
+
+# TARGET = backend.exe
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../release/ -lQxOrmd
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../debug/ -lQxOrmd
+
+INCLUDEPATH += $$PWD/../../../../lib
+DEPENDPATH += $$PWD/../../../../lib

@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
     // Parameters to connect to the PostgreSQL database
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
-    db.setDatabaseName("bus");
+    db.setDatabaseName("Prueba");
     db.setUserName("postgres");
-    db.setPassword("alumno");
+    db.setPassword("admin");
 
     // Open the connection to the database
     if (!db.open()) {

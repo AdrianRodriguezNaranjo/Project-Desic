@@ -15,6 +15,11 @@ bool Database::createLineTable()
         return false;
     }
 
+    if (!query.exec("DROP TABLE IF EXISTS bus_stop")) {
+        qDebug() << "Error: Failed to drop the bus_stop table:" << query.lastError().text();
+        return false;
+    }
+
     if (!query.exec("CREATE TABLE IF NOT EXISTS line ("
                     "id SERIAL PRIMARY KEY,"
                     "number int,"
@@ -34,6 +39,18 @@ bool Database::createLineTable()
         qDebug() << "Error: Failed to create the schedule table:" << query.lastError().text();
         return false;
     }
+
+    if (!query.exec("CREATE TABLE IF NOT EXISTS bus_stop ("
+                    "id SERIAL PRIMARY KEY,"
+                    "location VARCHAR(255) NOT NULL,"
+                    "line_id INT,"
+                    "imagenFilePath VARCHAR(255),"
+                    "FOREIGN KEY (line_id) REFERENCES line(id) ON DELETE CASCADE"
+                    ")")) {
+        qDebug() << "Error: Failed to create the schedule table:" << query.lastError().text();
+        return false;
+    }
+
 
     return true;
 }
