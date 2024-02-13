@@ -28,6 +28,7 @@ LIBS += -l"QxOrm"
 } # CONFIG(debug, debug|release)
 
 SOURCES += \
+    chatserver.cpp \
     database.cpp \
     http_server.cpp \
     line.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
     schedule.cpp
 
 HEADERS += \
+    chatserver.h \
     database.h \
     export.h \
     http_server.h \
