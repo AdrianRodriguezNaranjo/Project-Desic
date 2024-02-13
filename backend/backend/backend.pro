@@ -32,7 +32,8 @@ SOURCES += \
     http_server.cpp \
     line.cpp \
     main.cpp \
-    schedule.cpp
+    schedule.cpp \
+    user.cpp
 
 HEADERS += \
     database.h \
@@ -40,4 +41,5 @@ HEADERS += \
     http_server.h \
     line.h \
     precompiled.h \
-    schedule.h
+    schedule.h \
+    user.h
