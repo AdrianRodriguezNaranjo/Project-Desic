@@ -29,6 +29,7 @@ LIBS += -l"QxOrm"
 
 SOURCES += \
     bus_stop.cpp \
+    chatserver.cpp \
     database.cpp \
     http_server.cpp \
     line.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 
 HEADERS += \
     bus_stop.h \
+    chatserver.h \
     database.h \
     export.h \
     http_server.h \

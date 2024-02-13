@@ -13,6 +13,7 @@
 #include "line.h"
 #include "schedule.h"
 #include "database.h"
+#include "chatserver.h"
 // #include "http_server.h"
 
 static void setCorsHeaders(QHttpServerResponse &response)
@@ -144,5 +145,6 @@ int main(int argc, char *argv[])
                     "Running on http://127.0.0.1:%1/ (Press CTRL+C to quit)")
                     .arg(port);
 
+    ChatServer server(1234);
     return app.exec();
 }
