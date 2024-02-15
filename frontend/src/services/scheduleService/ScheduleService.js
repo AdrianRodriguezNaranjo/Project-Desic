@@ -59,10 +59,12 @@ const remove = async (id, idLine) => {
   }
 };
 
-export default {
+const ScheduleService = {
   getAll,
   get,
   create,
   update,
   remove
 };
+
+export default ScheduleService;

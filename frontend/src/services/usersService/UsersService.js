@@ -59,10 +59,12 @@ const remove = async (id) => {
   }
 };
 
-export default {
-    getAll,
-    get,
-    create,
-    update,
-    remove
-  };
+const UserService = {
+  getAll,
+  get,
+  create,
+  update,
+  remove
+};
+
+export default UserService;

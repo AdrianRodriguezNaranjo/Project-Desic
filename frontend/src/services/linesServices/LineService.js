@@ -59,10 +59,12 @@ const remove = async (id) => {
   }
 };
 
-export default {
+const LineService = {
   getAll,
   get,
   create,
   update,
   remove
 };
+
+export default LineService;

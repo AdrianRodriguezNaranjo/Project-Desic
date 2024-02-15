@@ -152,11 +152,14 @@ int main(int argc, char *argv[])
         "/v2/line", QHttpServerRequest::Method::Post,
         [](const QHttpServerRequest &request)
         {
+            qDebug() << "Valor request: " << request.body();
             const auto json = byteArrayToJsonObject(request.body());
             if (!json || !json->contains("number") || !json->contains("firstbusstop")|| !json->contains("lastbusstop"))
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
             QSharedPointer<Line> new_line(new Line());
-            new_line->number = json->value("number").toInt();
+            const auto number = json->value("number").toString();
+            new_line->number = number.toInt();
+            // new_line->number = json->value("number").toInt();
             new_line->firstbusstop = json->value("firstbusstop").toString();
             new_line->lastbusstop = json->value("lastbusstop").toString();
             QSqlQuery insertQuery;
@@ -195,7 +198,7 @@ int main(int argc, char *argv[])
             QSqlQuery updateQuery;
             updateQuery.prepare("UPDATE line SET number = :number, firstbusstop = :firstbusstop, lastbusstop = :lastbusstop WHERE id = :id");
             updateQuery.bindValue(":id", lineId);
-            updateQuery.bindValue(":number", json->value("number").toInt());
+            updateQuery.bindValue(":number", json->value("number").toString());
             updateQuery.bindValue(":firstbusstop", json->value("firstbusstop").toString());
             updateQuery.bindValue(":lastbusstop", json->value("lastbusstop").toString());
             if (!updateQuery.exec()) {

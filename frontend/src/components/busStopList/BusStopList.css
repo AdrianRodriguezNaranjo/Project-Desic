@@ -1,0 +1,57 @@
+.container{
+    padding-top: 100px;
+    padding-bottom: 70px;
+    }
+    
+    .elementBody{
+        min-height: 150px;
+        background-color: #3D505D;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        column-count: 1;
+        column-gap: 10px;
+        color: yellow;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 3px solid #688CA4;
+    }
+    
+    .elementBody>button{
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        width: 40%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
+    .elementBody>img{
+        width: 60%;
+        height: auto;
+    }
+    
+    .buttonSchedule{
+        background-color: #7eaac7;
+    }
+    
+    .delButton{
+        background-color: red;
+        color: white;
+        border: none;
+        z-index: 50;
+    }
+    
+    .updButton{
+        background-color: rgb(220, 253, 3);
+        color: black;
+        border: none;
+        z-index: 50;
+    }
+    
+    .buttonAdd{
+       margin-left: 75%;
+    }
