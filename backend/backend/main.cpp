@@ -16,6 +16,7 @@
 #include "bus_user.h"
 #include "database.h"
 #include "chatserver.h"
+#include "user_lines.h"
 // #include "http_server.h"
 
 static std::optional<QJsonObject> byteArrayToJsonObject(const QByteArray &arr)
@@ -165,7 +166,7 @@ int main(int argc, char *argv[])
             insertQuery.bindValue(":firstbusstop", new_line->firstbusstop);
             insertQuery.bindValue(":lastbusstop", new_line->lastbusstop);
             if (!insertQuery.exec()) {
-                qDebug() << "Error: Failed to insert bicycle:" << insertQuery.lastError().text();
+                qDebug() << "Error: Failed to insert line:" << insertQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
             }
             // QHttpServerResponse(QHttpServerResponder::StatusCode::Created);
@@ -371,6 +372,154 @@ int main(int argc, char *argv[])
         });
 
     httpServer.route(
+        "/v2/line/<arg>/schedule", QHttpServerRequest::Method::Get,
+        [](qint64 lineId, const QHttpServerRequest &)
+        {
+            QString sqlQuery = QString("SELECT * FROM schedule WHERE line_id = %1").arg(lineId);
+            QSqlQuery query(sqlQuery);
+            QSqlError error = query.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << query.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+
+            QList<Schedule> scheduleList;
+            while (query.next()) {
+                Schedule schedule;
+                schedule.id = query.value("id").toInt();
+                schedule.line_id = query.value("line_id").toInt();
+                schedule.time = query.value("time").toTime();
+                scheduleList.append(schedule);
+            }
+
+            // Construye la respuesta JSON
+            QJsonArray jsonArray;
+            for (const Schedule &schedule : scheduleList) {
+                QJsonObject jsonObject;
+                jsonObject["id"] = static_cast<qint64>(schedule.id);
+                jsonObject["line_id"] = static_cast<qint64>(schedule.line_id);
+                jsonObject["time"] = schedule.time.toString();
+                jsonArray.append(jsonObject);
+            }
+            QJsonDocument jsonDocument(jsonArray);
+            QByteArray responseData = jsonDocument.toJson();
+
+            // Construye la respuesta HTTP
+            QHttpServerResponse response(responseData);
+            setCorsHeaders(response);
+            return response;
+        });
+
+    httpServer.route(
+        "/v2/line/<arg>/schedule/<arg>", QHttpServerRequest::Method::Get,
+        [](qint64 lineId, qint64 scheduleId, const QHttpServerRequest &)
+        {
+            QString sqlQuery = QString("SELECT * FROM schedule WHERE line_id = %1 AND id = %2").arg(lineId).arg(scheduleId);
+            QSqlQuery query(sqlQuery);
+            QSqlError error = query.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << query.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+
+            if (query.next()) {
+                QJsonObject jsonObject;
+                jsonObject["id"] = static_cast<qint64>(query.value("id").toInt());
+                jsonObject["line_id"] = static_cast<qint64>(query.value("line_id").toInt());
+                jsonObject["time"] = query.value("time").toTime().toString();
+
+                QJsonDocument jsonDocument(jsonObject);
+                QByteArray responseData = jsonDocument.toJson();
+                QHttpServerResponse response(responseData);
+                setCorsHeaders(response);
+                return response;
+            } else {
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::NotFound);
+            }
+        });
+
+    httpServer.route("/v2/line/<arg>/schedule", QHttpServerRequest::Method::Options,
+                     [](qint64 lineId, const QHttpServerRequest &)
+                     {
+                         QHttpServerResponse response("");
+                         setCorsHeaders(response);
+                         return response;
+                     });
+
+    httpServer.route(
+        "/v2/line/<arg>/schedule", QHttpServerRequest::Method::Post,
+        [](qint64 lineId, const QHttpServerRequest &request)
+        {
+            const auto json = byteArrayToJsonObject(request.body());
+            if (!json || !json->contains("time"))
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
+
+            QSharedPointer<Schedule> newSchedule(new Schedule());
+            newSchedule->line_id = lineId;
+            newSchedule->time = QTime::fromString(json->value("time").toString(), "hh:mm:ss");
+            QSqlQuery insertQuery;
+            insertQuery.prepare("INSERT INTO schedule (line_id, time) "
+                                "VALUES (:line_id, :time)");
+            insertQuery.bindValue(":line_id", static_cast<int>(newSchedule->line_id));
+            insertQuery.bindValue(":time", newSchedule->time.toString("hh:mm:ss"));
+            if (!insertQuery.exec()) {
+                qDebug() << "Error: Failed to insert schedule:" << insertQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
+    httpServer.route("/v2/line/<arg>/schedule/<arg>", QHttpServerRequest::Method::Options,
+                     [](qint64 lineId, qint64 scheduleId, const QHttpServerRequest &)
+                     {
+                         QHttpServerResponse response("");
+                         setCorsHeaders(response);
+                         return response;
+                     });
+
+    httpServer.route(
+        "/v2/line/<arg>/schedule/<arg>", QHttpServerRequest::Method::Put,
+        [](qint64 lineId, qint64 scheduleId, const QHttpServerRequest &request)
+        {
+            const auto json = byteArrayToJsonObject(request.body());
+            if (!json || !json->contains("time"))
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
+
+            QSqlQuery updateQuery;
+            updateQuery.prepare("UPDATE schedule SET time = :time WHERE id = :id AND line_id = :line_id");
+            updateQuery.bindValue(":id", scheduleId);
+            updateQuery.bindValue(":line_id", lineId);
+            updateQuery.bindValue(":time", QTime::fromString(json->value("time").toString(), "hh:mm:ss"));
+
+            if (!updateQuery.exec()) {
+                qDebug() << "Error executing query:" << updateQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
+    // Ruta para eliminar un horario existente
+    httpServer.route(
+        "/v2/line/<arg>/schedule/<arg>", QHttpServerRequest::Method::Delete,
+        [](qint64 lineId, qint64 scheduleId, const QHttpServerRequest &request)
+        {
+            QString sqlQuery = QString("DELETE FROM schedule WHERE id = %1 AND line_id = %2").arg(scheduleId).arg(lineId);
+            QSqlQuery deleteQuery(sqlQuery);
+            QSqlError error = deleteQuery.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << deleteQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
+    httpServer.route(
         "/v2/bus_stop", QHttpServerRequest::Method::Get,
         [](const QHttpServerRequest &)
         {
@@ -528,6 +677,159 @@ int main(int argc, char *argv[])
             return response;
         });
 
+
+    httpServer.route(
+        "/v2/line/<arg>/bus_stop", QHttpServerRequest::Method::Get,
+        [](qint64 lineId, const QHttpServerRequest &)
+        {
+            QString sqlQuery = QString("SELECT * FROM bus_stop WHERE line_id = %1").arg(lineId);
+            QSqlQuery query(sqlQuery);
+            QSqlError error = query.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << query.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+
+            QList<Bus_Stop> busStopList;
+            while (query.next()) {
+                Bus_Stop busStop;
+                busStop.id = query.value("id").toLongLong();
+                busStop.line_id = query.value("line_id").toLongLong();
+                busStop.location = query.value("location").toString();
+                busStop.imagenFilePath = query.value("imagenFilePath").toString();
+                busStopList.append(busStop);
+            }
+
+            QJsonArray jsonArray;
+            for (const Bus_Stop &busStop : busStopList) {
+                QJsonObject jsonObject;
+                jsonObject["id"] = static_cast<qint64>(busStop.id);
+                jsonObject["line_id"] = static_cast<qint64>(busStop.line_id);
+                jsonObject["location"] = busStop.location;
+                jsonObject["imagenFilePath"] = busStop.imagenFilePath;
+                jsonArray.append(jsonObject);
+            }
+            QJsonDocument jsonDocument(jsonArray);
+            QByteArray responseData = jsonDocument.toJson();
+
+            // Construye la respuesta HTTP
+            QHttpServerResponse response(responseData);
+            setCorsHeaders(response);
+            return response;
+        });
+
+    httpServer.route(
+        "/v2/line/<arg>/bus_stop/<arg>", QHttpServerRequest::Method::Get,
+        [](qint64 lineId, qint64 busStopId, const QHttpServerRequest &)
+        {
+            QString sqlQuery = QString("SELECT * FROM bus_stop WHERE line_id = %1 AND id = %2").arg(lineId).arg(busStopId);
+            QSqlQuery query(sqlQuery);
+            QSqlError error = query.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << query.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+
+            if (query.next()) {
+                QJsonObject jsonObject;
+                jsonObject["id"] = static_cast<qint64>(query.value("id").toLongLong());
+                jsonObject["line_id"] = static_cast<qint64>(query.value("line_id").toLongLong());
+                jsonObject["location"] = query.value("location").toString();
+                jsonObject["imagenFilePath"] = query.value("imagenFilePath").toString();
+
+                QJsonDocument jsonDocument(jsonObject);
+                QByteArray responseData = jsonDocument.toJson();
+                QHttpServerResponse response(responseData);
+                setCorsHeaders(response);
+                return response;
+            } else {
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::NotFound);
+            }
+        });
+
+    httpServer.route("/v2/line/<arg>/bus_stop", QHttpServerRequest::Method::Options,
+                     [](qint64 lineId, const QHttpServerRequest &)
+                     {
+                         QHttpServerResponse response("");
+                         setCorsHeaders(response);
+                         return response;
+                     });
+
+    httpServer.route(
+        "/v2/line/<arg>/bus_stop", QHttpServerRequest::Method::Post,
+        [](qint64 lineId, const QHttpServerRequest &request)
+        {
+            const auto json = byteArrayToJsonObject(request.body());
+            if (!json || !json->contains("location") || !json->contains("imagenFilePath"))
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
+
+            QSharedPointer<Bus_Stop> newBusStop(new Bus_Stop());
+            newBusStop->line_id = lineId;
+            newBusStop->location = json->value("location").toString();
+            newBusStop->imagenFilePath = json->value("imagenFilePath").toString();
+            QSqlQuery insertQuery;
+            insertQuery.prepare("INSERT INTO bus_stop (line_id, location, imagenFilePath) "
+                                "VALUES (:line_id, :location, :imagenFilePath)");
+            insertQuery.bindValue(":line_id", static_cast<int>(newBusStop->line_id));
+            insertQuery.bindValue(":location", newBusStop->location);
+            insertQuery.bindValue(":imagenFilePath", newBusStop->imagenFilePath);
+            if (!insertQuery.exec()) {
+                qDebug() << "Error: Failed to insert schedule:" << insertQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
+    httpServer.route("/v2/line/<arg>/bus_stop/<arg>", QHttpServerRequest::Method::Options,
+                     [](qint64 lineId, qint64 busStopId, const QHttpServerRequest &)
+                     {
+                         QHttpServerResponse response("");
+                         setCorsHeaders(response);
+                         return response;
+                     });
+
+    httpServer.route(
+        "/v2/line/<arg>/bus_stop/<arg>", QHttpServerRequest::Method::Put,
+        [](qint64 lineId, qint64 busStopId, const QHttpServerRequest &request)
+        {
+            const auto json = byteArrayToJsonObject(request.body());
+            if (!json || !json->contains("location") || !json->contains("imagenFilePath"))
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
+
+            QSqlQuery updateQuery;
+            updateQuery.prepare("UPDATE bus_stop SET line_id = :line_id, location = :location, imagenFilePath = :imagenFilePath WHERE id = :id");
+            updateQuery.bindValue(":id", busStopId);
+            updateQuery.bindValue(":line_id", lineId);
+            updateQuery.bindValue(":location", json->value("location").toString());
+            updateQuery.bindValue(":imagenFilePath", json->value("imagenFilePath").toString());
+            if (!updateQuery.exec()) {
+                qDebug() << "Error executing query:" << updateQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
+    // Ruta para eliminar un horario existente
+    httpServer.route(
+        "/v2/line/<arg>/bus_stop/<arg>", QHttpServerRequest::Method::Delete,
+        [](qint64 lineId, qint64 busStopId, const QHttpServerRequest &request)
+        {
+            QString sqlQuery = QString("DELETE FROM bus_stop WHERE id = %1 AND line_id = %2").arg(busStopId).arg(lineId);
+            QSqlQuery deleteQuery(sqlQuery);
+            QSqlError error = deleteQuery.lastError();
+            if (error.type() != QSqlError::NoError) {
+                qDebug() << "Error executing query:" << deleteQuery.lastError().text();
+                return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+            }
+            QHttpServerResponse response("");
+            setCorsHeaders(response);
+            return response;
+        });
+
 httpServer.route(
     "/v2/bus_user", QHttpServerRequest::Method::Get,
     [](const QHttpServerRequest &)
@@ -657,6 +959,27 @@ httpServer.route(
         return response;
     });
 
+httpServer.route(
+    "/v2/user_lines", QHttpServerRequest::Method::Post,
+    [](const QHttpServerRequest &request)
+    {
+        const auto json = byteArrayToJsonObject(request.body());
+        if (!json || !json->contains("user_id") || !json->contains("line_id"))
+            return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
+
+        QSqlQuery insertQuery;
+        insertQuery.prepare("INSERT INTO user_lines (user_id, line_id) "
+                            "VALUES (:user_id, :line_id)");
+        insertQuery.bindValue(":user_id", json->value("user_id").toInt());
+        insertQuery.bindValue(":line_id", json->value("line_id").toInt());
+        if (!insertQuery.exec()) {
+            qDebug() << "Error: Failed to insert user-line relationship:" << insertQuery.lastError().text();
+            return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
+        }
+        QHttpServerResponse response("");
+        setCorsHeaders(response);
+        return response;
+    });
 
     const auto port = httpServer.listen(QHostAddress::Any, 49080);
     if (!port)

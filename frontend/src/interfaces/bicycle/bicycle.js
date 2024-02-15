@@ -2,7 +2,7 @@ import BicycleCreate from "../../components/bicycleCreate/bicycleCreate";
 import BicycleList from "../../components/bicycleList/bicycleList";
 import Consts from "../../components/const/const";
 import "./bicycle.css";
-import BicycleService from "../../services/bicycle/bicycle.service";
+import LineService from "../../services/linesServices/LineService";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,11 +14,11 @@ function Bicycle() {
   const [mode, setMode] = useState(Consts.addMode);
   const [bicycle, setBicycle] = useState("");
   const [lineList, setlineList] = useState([]);
-  const headline = ['id', 'brand', 'model'];
+  const headline = ['number', 'firstbusstop', 'lastbusstop'];
 
   const getBicycles= async () => {
     try {
-      const response = await BicycleService.getBicycles();
+      const response = await LineService.getAll();
       console.log(response);
       setlineList(response);
     } catch (error) {
@@ -33,15 +33,15 @@ function Bicycle() {
   const row = (line) => {
     return (
       <>
-        <td>{line.id}</td>
-        <td>{line.brand}</td>
-        <td>{line.model}</td>
+        <td>{line.number}</td>
+        <td>{line.firstbusstop}</td>
+        <td>{line.lastbusstop}</td>
       </>
     );
   };
 
   const onDelete = async (id) => {
-    await BicycleService.remove(id);
+    await LineService.remove(id);
     getBicycles();
   };
 

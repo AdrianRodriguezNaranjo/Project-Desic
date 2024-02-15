@@ -73,8 +73,8 @@ bool Database::createLineTable()
     }
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS user_lines ("
-                    "user_id SERIAL,"
-                    "line_id SERIAL,"
+                    "user_id INT,"
+                    "line_id INT,"
                     "PRIMARY KEY (user_id, line_id),"
                     "FOREIGN KEY (user_id) REFERENCES bus_user(id) ON DELETE CASCADE,"
                     "FOREIGN KEY (line_id) REFERENCES line(id) ON DELETE CASCADE"
