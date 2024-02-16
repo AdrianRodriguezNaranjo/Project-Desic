@@ -47,16 +47,13 @@ The aplication works in web in particular on mobile.
 1.2 If you want to see the stops or the schedule, first select the line.
 
 ### 2.Administrator:
-2.1 All the registers need the elements that are requested. that includes images.
+2.1 All the registers need the elements that are requested.
 
 2.2 The user with the role administrator has to be assigned in the database.
 
 2.3 When deleting a line, stops and times are deleted in cascade.
 
 # Technical specifications for the server application and the APP
-The application uses a mysql server to store the logs of all tables and a backend folder in public/images to store the images themselves.
-
-In the application, if a record containing a photo is deleted, it is already programmed to delete the photo in the backend as well.
 > [!WARNING]
 >In case the backend closes normally or unexpectedly, there is no way to navigate through the frontend.
 
@@ -66,8 +63,35 @@ In the application, if a record containing a photo is deleted, it is already pro
 # Usability and Accessibility
 
 # Manuals
+## Developer installation
+Before executing the file it is necessary to have** postgresSql installed** and ** QT **.
+
+Once the above is done, it is time to install the backend. Located in the Backend folder of the project, we go to run the Backend. This action will create the databases tables automatic in the database named before corresponding
+
+Now to install the Frontend, follow the same steps as above, but instead of going to the Backend folder, this time we go to the **frontend folder** and use the comand "**npm install**" step.
+
+If you now want to start everything you need to execute the backend with Qt, and the frontend with Visual Studio Code through a terminal with Git bash for example, run the command "**npm start**".\
+
+When you run npm start on the frontend, the application will be opened.
+> [!NOTE]
+> When you open only the application without the backend, as it is a web application, it is normal that it does not work because you can not log in.
+
+
+## User/Technician installation
+To install the application, it is necessary to access the Frontend folder of the project folder.\
+Once accessed the folder, enter the command in the terminal "**npm install**" to install the necessary files, and after installing everything run the command "**npm start**" to open the application.
 
 # User manual
+To begin using the application, it is necessary to have a registered account. If you don't have one, you can click on 'Register' to sign up for our application. If you already have an account, you can use 'Log In' with your existing credentials.
+
+The application is divided into 3 main sections:
+
+1. Lines
+   - In the main view, you will see all the lines that are currently in operation.
+2. Schedule
+   - By selecting a line, you can view the departure times associated with the selected line in this view.
+3. Stops
+   - By selecting a line, you can view the stops along with their images associated with the selected line in this view.
 
 # Technological Stack
 ### Backend:
@@ -84,6 +108,7 @@ In the application, if a record containing a photo is deleted, it is already pro
 # type of application
 
 # Why this type of application?
+I use this format because usually the information of each line and stop is updated every few days so it is better to rely on a server. Then another point is that as the information is constantly changing, it is not profitable to store information locally, making the application heavier.
 
 # Repository
  ![GitHub]
