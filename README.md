@@ -71,15 +71,15 @@ In the application, if a record containing a photo is deleted, it is already pro
 
 # Technological Stack
 ### Backend:
-  * [![Express][Express.js]][Express-url]
-  * [![Node][Node.js]][Node-url]
-  * [![MySQL][Mysql]][Mysql-url]
+  * Qt
+  * C++
+  * PostgresSQL
   
 ### Frontend:
-  * [![React][React.js]][React-url]
-  * [![JavaScript][Javascript]][Javascript-url]
-  * [![HTML5][Html5]][Html5-url]
-  * [![CSS3][Css3]][Css3-url]
+  * React
+  * JavaScript
+  * HTML5
+  * CSS3
 
 # type of application
 
@@ -99,23 +99,6 @@ The application, although it may seem basic, provides users with the essential i
 
 The project has contributed to my growth as a programmer, allowing me to develop new knowledge about backends and React. I gained insights into topics such as tokens and private addresses.
 
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[Node.js]: https://img.shields.io/badge/Node.js-<18.17>-green?style=for-the-badge&logo=node.js&logoColor=white
-[javascript]:https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=
-[Mysql]:https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white
-[Javascript]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[Html5]:https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
-[Css3]: https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+
 [Github]:https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
-[React-url]: https://reactjs.org/
-[Node-url]: https://nodejs.org/
-[javascript-url]: https://developer.mozilla.org/es/docs/Web/JavaScript
-[Express-url]: https://expressjs.com
-[Mysql-url]: https://www.mysql.com
-[Scrum-url]: https://www.scrum.org/
-[Github-url]: https://github.com/your-username/your-repository
-[Javascript-url]:https://developer.mozilla.org/es/docs/Web/JavaScript
-[Html5-url]:https://developer.mozilla.org/en-US/docs/Glossary/HTML5
-[Css3-url]:https://developer.mozilla.org/en-US/docs/Web/CSS
-[Github-url]: https://github.com/JoelMartinHernandez/Proyecto-Desic
+[Github-url]: https://github.com/Naidr/Project-Desic.git
