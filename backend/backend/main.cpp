@@ -459,12 +459,12 @@ int main(int argc, char *argv[])
 
             QSharedPointer<Schedule> newSchedule(new Schedule());
             newSchedule->line_id = lineId;
-            newSchedule->time = QTime::fromString(json->value("time").toString(), "hh:mm:ss");
+            newSchedule->time = QTime::fromString(json->value("time").toString(), "hh:mm");
             QSqlQuery insertQuery;
             insertQuery.prepare("INSERT INTO schedule (line_id, time) "
                                 "VALUES (:line_id, :time)");
             insertQuery.bindValue(":line_id", static_cast<int>(newSchedule->line_id));
-            insertQuery.bindValue(":time", newSchedule->time.toString("hh:mm:ss"));
+            insertQuery.bindValue(":time", newSchedule->time.toString("hh:mm"));
             if (!insertQuery.exec()) {
                 qDebug() << "Error: Failed to insert schedule:" << insertQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
@@ -494,7 +494,7 @@ int main(int argc, char *argv[])
             updateQuery.prepare("UPDATE schedule SET time = :time WHERE id = :id AND line_id = :line_id");
             updateQuery.bindValue(":id", scheduleId);
             updateQuery.bindValue(":line_id", lineId);
-            updateQuery.bindValue(":time", QTime::fromString(json->value("time").toString(), "hh:mm:ss"));
+            updateQuery.bindValue(":time", QTime::fromString(json->value("time").toString(), "hh:mm"));
 
             if (!updateQuery.exec()) {
                 qDebug() << "Error executing query:" << updateQuery.lastError().text();

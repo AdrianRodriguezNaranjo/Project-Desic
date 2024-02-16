@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import LineService from "../../services/linesServices/LineService";
 import { useNavigate } from "react-router-dom";
 import { Button, message, Popconfirm} from 'antd';
+
 const LineList = () => {
   const [lines, setLines] = useState([]);
   const [currentLine, setCurrentLine] = useState(null);
@@ -76,4 +77,4 @@ const updateLine=(l)=>{
   );
 };
 
-export default LineList
+export default LineList;

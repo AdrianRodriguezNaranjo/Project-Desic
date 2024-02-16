@@ -19,28 +19,26 @@ const AddSchedule = () => {
   const schedulesRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
 
-
-
   const saveSchedule = () => {
     var data = {
-      HourAndMinutes: schedulesRef.current.value === '' ? null : schedulesRef.current.value,
-      idLine: idLine
+      time: schedulesRef.current.value === '' ? null : schedulesRef.current.value
     };
 
-    const time = schedulesRef.current.value
+    const time = schedulesRef.current.value;
 
-    if(time === null|| time === ''){
-      notification.error({message:'Ha ocurrido un error',description:'Comprueba que todos los campos esten rellenados', duration: 5})
-    }else{
-    ScheduleService.create(data)
-      .then(response => {
-        navigate(`/Line/${idLine}/schedule`)
-      })
+    if (time === null || time === '') {
+      notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
+    } else {
+      console.log(data);
+      ScheduleService.create(idLine, data)
+        .then(response => {
+          navigate(`/Line/${idLine}/schedule`);
+        })
     }
   };
   return (
     <div>
-      <HeaderSchedule/>
+      <HeaderSchedule />
       <div className="bodyAddLine">
         <form className="form-group" >
           <label htmlFor="number">Hora y minuto</label>
@@ -61,9 +59,9 @@ const AddSchedule = () => {
           </Button>
         </form>
       </div>
-      <FooterSchedule/>
+      <FooterSchedule />
     </div>
   )
 
 }
-export default AddSchedule
+export default AddSchedule;

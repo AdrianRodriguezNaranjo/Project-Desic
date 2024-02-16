@@ -1,7 +1,7 @@
 import BusStopService from "../../services/busStopService/BusStopService";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
-import { Button, notification, Space } from "antd";
+import { Button, notification, Input, Space } from "antd";
 import HeaderBusStop from "../headerBusStop/HeaderBusStop";
 import FooterBusStop from "../footerBusStop/FooterBusStop";
 
@@ -15,35 +15,32 @@ const AddBusStop = () => {
   const fileInputRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
 
-  
-
   const saveBusStop = () => {
     var data = {
-      Location: busStopRef.current.value === '' ? null : busStopRef.current.value,
-      idLine: idLine,
-      file:  fileInputRef.current.value === '' ? null : fileInputRef.current.files[0],
+      location: busStopRef.current.value === '' ? null : busStopRef.current.value,
+      file: fileInputRef.current.value === '' ? null : fileInputRef.current.files[0],
     };
 
-   const locationD = busStopRef.current.value
-   const fileD = fileInputRef.current.value
+    const locationD = busStopRef.current.value
+    const fileD = fileInputRef.current.value
 
-    if(locationD === null|| locationD === '' || fileD === null || fileD === ''){
-      notification.error({message:'Ha ocurrido un error',description:'Comprueba que todos los campos esten rellenados', duration: 5})
-    }else{
-      BusStopService.create(data)
-      .then(response => {
-        navigate(`/Line/${idLine}/listBusStop`)
-      })
+    if (locationD === null || locationD === '' || fileD === null || fileD === '') {
+      notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
+    } else {
+      BusStopService.create(idLine, data)
+        .then(response => {
+          navigate(`/Line/${idLine}/BusStop`)
+        })
     };
 
   };
   return (
     <div>
-      <HeaderBusStop/>
+      <HeaderBusStop />
       <div className="bodyAddLine">
         <form className="form-group" >
           <label htmlFor="Location">Localizacion</label>
-          <input
+          <Input
             type="text"
             className="form-control"
             id="Location"
@@ -54,7 +51,7 @@ const AddBusStop = () => {
           />
 
           <label htmlFor="filename">Imagen</label>
-          <input
+          <Input
             type="file"
             className="form-control"
             id="filename"
@@ -71,11 +68,10 @@ const AddBusStop = () => {
           </Button>
         </form>
 
-
       </div>
-      <FooterBusStop/>
+      <FooterBusStop />
     </div>
   )
 
 }
-export default AddBusStop
+export default AddBusStop;

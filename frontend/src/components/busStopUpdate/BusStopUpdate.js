@@ -1,12 +1,12 @@
 import BusStopService from "../../services/busStopService/BusStopService";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
-import { Button,message, Popconfirm, notification } from "antd";
+import { Button, message, Popconfirm, notification } from "antd";
 import HeaderBusStop from "../headerBusStop/HeaderBusStop";
 import FooterBusStop from "../footerBusStop/FooterBusStop";
 
 const UpdateBusStop = () => {
-    const b= JSON.parse(localStorage.getItem("busStop"))
+  const b = JSON.parse(localStorage.getItem("busStop"))
 
   const navigate = useNavigate();
   const { idLine } = useParams();
@@ -19,6 +19,7 @@ const UpdateBusStop = () => {
     message.success('Parada Actualizada');
     updateBusStop(id)
   };
+
   const cancel = (e) => {
     console.log(e);
     message.error('Cancelado');
@@ -27,24 +28,23 @@ const UpdateBusStop = () => {
   const updateBusStop = () => {
     var data = {
       Location: busStopRef.current.value,
-      idLine: idLine,
-      file:  fileInputRef.current.files[0]
+      file: fileInputRef.current.files[0]
     };
     const locationD = busStopRef.current.value
     const fileD = fileInputRef.current.value
- 
-     if(locationD === null|| locationD === '' || fileD === null || fileD === ''){
-      notification.error({message:'Ha ocurrido un error',description:'Comprueba que todos los campos esten rellenados', duration: 5})
-     }else{
-    BusStopService.update(b.id,data)
-      .then(response => {
-        navigate(`/Line/${idLine}/listBusStop`)
-      })
+
+    if (locationD === null || locationD === '' || fileD === null || fileD === '') {
+      notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
+    } else {
+      BusStopService.update(b.id, idLine, data)
+        .then(response => {
+          navigate(`/Line/${idLine}/BusStop`)
+        })
     }
   };
   return (
     <div>
-      <HeaderBusStop/>
+      <HeaderBusStop />
       <div className="bodyAddLine">
         <form className="form-group" >
           <label htmlFor="Location">Localizacion</label>
@@ -66,16 +66,16 @@ const UpdateBusStop = () => {
             name="filename"
             ref={fileInputRef}
           />
-                  <Popconfirm
-              title="Actualizar Linea"
-              description="Estas seguro de que quieres actualizar esta parada?"
-              onConfirm={() => confirm(b.id)}
-              onCancel={() => cancel()}
-              okText="Si"
-              cancelText="No">
-          <Button className="btn btn-success">
-            Guardar
-          </Button>
+          <Popconfirm
+            title="Actualizar Linea"
+            description="Estas seguro de que quieres actualizar esta parada?"
+            onConfirm={() => confirm(b.id)}
+            onCancel={() => cancel()}
+            okText="Si"
+            cancelText="No">
+            <Button className="btn btn-success">
+              Guardar
+            </Button>
           </Popconfirm>
           <Button onClick={() => navigate(`/Line/${idLine}/BusStop`)} className="btn-denegade">
             Cancelar
@@ -84,7 +84,7 @@ const UpdateBusStop = () => {
 
 
       </div>
-      <FooterBusStop/>
+      <FooterBusStop />
     </div>
   )
 

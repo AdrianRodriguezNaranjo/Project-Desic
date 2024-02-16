@@ -10,12 +10,22 @@ const ScheduleList = () => {
   const navigate = useNavigate();
   const { idLine } = useParams();
 
+  const retrieveSchedule = async () => {
+    try {
+      const response = await ScheduleService.getAll(idLine);
+      setSchedule(response);
+      console.log(schedules);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const confirm = (id) => {
     console.log(id);
     message.success('Se ha eliminado');
     deleteSchedule(id)
   };
+
   const cancel = (e) => {
     console.log(e);
     message.error('Cancelado');
@@ -25,26 +35,16 @@ const ScheduleList = () => {
     retrieveSchedule();
   }, []);
 
-  const retrieveSchedule = () => {
-    ScheduleService.getAll(idLine)
-      .then(response => {
-        setSchedule(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
   const deleteSchedule = (id) => {
-    ScheduleService.remove(id).then(response => {
+    ScheduleService.remove(id,idLine).then(response => {
       retrieveSchedule();
     })
-    ScheduleService.getAll()
+    ScheduleService.getAll(idLine);
   }
 
   const updateSchedule = (s) => {
-    localStorage.setItem("schedule", JSON.stringify(s))
-    navigate(`/Line/${idLine}/updateSchedule`)
+    localStorage.setItem("schedule", JSON.stringify(s));
+    navigate(`/Line/${idLine}/updateSchedule`);
   }
 
   return (
@@ -53,7 +53,7 @@ const ScheduleList = () => {
         return (
           <div key={index} className="elementBody">
             <h3>Horas de salida</h3>
-            <p>{s.HourAndMinutes}</p>
+            <p>{s.time}</p>
 
             <Popconfirm
               title="Eliminar Linea"

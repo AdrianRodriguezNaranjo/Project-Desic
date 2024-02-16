@@ -18,6 +18,7 @@ const UpdateSchedule = () => {
     message.success('Hora Actualizada');
     updateSchedule(id)
   };
+
   const cancel = (e) => {
     console.log(e);
     message.error('Cancelado');
@@ -25,15 +26,14 @@ const UpdateSchedule = () => {
 
   const updateSchedule = () => {
     var data = {
-      HourAndMinutes: schedulesRef.current.value,
-      idLine: idLine
+      time: schedulesRef.current.value
     };
     const time = schedulesRef.current.value
 
     if(time === null|| time === ''){
       notification.error({message:'Ha ocurrido un error',description:'Comprueba que todos los campos esten rellenados', duration: 5})
     }else{
-    ScheduleService.update(s.id, data)
+    ScheduleService.update(s.id, idLine, data)
       .then(response => {
         navigate(`/Line/${idLine}/schedule`)
       })
@@ -55,7 +55,7 @@ const UpdateSchedule = () => {
           />
           <Popconfirm
             title="Actualizar Linea"
-            description="Estas seguro de que quieres actualizar esta hora?"
+            description="¿Estas seguro de que quieres actualizar esta hora?"
             onConfirm={() => confirm(s.id)}
             onCancel={() => cancel()}
             okText="Si"

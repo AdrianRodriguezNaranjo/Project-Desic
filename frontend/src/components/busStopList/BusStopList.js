@@ -11,12 +11,21 @@ const BusStopList = () => {
   const navigate = useNavigate();
   const { idLine } = useParams();
 
+  const retrieveBusStop = async () => {
+    try {
+      const response = await BusStopService.getAll(idLine);
+      setBusStop(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const confirm = (id) => {
     console.log(id);
     message.success('Se ha eliminado');
     deleteBusStop(id)
   };
+
   const cancel = (e) => {
     console.log(e);
     message.error('Cancelado');
@@ -26,21 +35,11 @@ const BusStopList = () => {
     retrieveBusStop();
   }, []);
 
-  const retrieveBusStop = () => {
-    BusStopService.getAll(idLine)
-      .then(response => {
-        setBusStop(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
   const deleteBusStop = (id) => {
-    BusStopService.remove(id).then(response => {
+    BusStopService.remove(id,idLine).then(response => {
       retrieveBusStop();
     })
-    BusStopService.getAll()
+    retrieveBusStop();
   }
 
   const updateBusStop = (b) => {
@@ -54,8 +53,8 @@ const BusStopList = () => {
         return (
           <div key={index} className="elementBody">
             <h3>Paradas</h3>
-            <p>Localizacion: {b.Location}</p>
-            <img src={`http://localhost:8080/images/${b.filename}`}></img>
+            <p>Localizacion: {b.location}</p>
+            {/* <img src={`http://localhost:8080/images/${b.filename}`}></img> */}
             <Popconfirm
               title="Eliminar Linea"
               description="Estas seguro de que quieres eliminar esta parada?"
@@ -74,4 +73,4 @@ const BusStopList = () => {
   )
 }
 
-export default BusStopList
+export default BusStopList;

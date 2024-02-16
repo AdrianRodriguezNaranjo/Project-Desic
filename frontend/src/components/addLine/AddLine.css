@@ -1,5 +1,5 @@
 .bodyAddLine{
-    background-color: #3D505D;
+    background-color: #3F6866;
     width: 100vw;
     height: 100vh;
     padding-top: 35%;
@@ -15,7 +15,7 @@
     margin-right: 10%;
     margin-top: 5%;
     background-color: green;
-    color: white;
+    color: black;
     border: 0;
 }
 
@@ -24,14 +24,14 @@
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 5%;
-    background-color: red;
-    color: white;
+    background-color: #FFCD38;
+    color: black;
     border: 0;
 }
 
 @media only screen and (min-width: 768px){
     .bodyAddLine{
-        background-color: #3D505D;
+        background-color: #3F6866;
         width: 100vw;
         height: 100vh;
         padding-top: 15%;
@@ -46,8 +46,8 @@
         margin-left: 10%;
         margin-right: 10%;
         margin-top: 2%;
-        background-color: green;
-        color: white;
+        background-color: rgb(206, 220, 243);
+
         border: 0;
     }
     
@@ -56,15 +56,15 @@
         margin-left: 20%;
         margin-right: 20%;
         margin-top: 3%;
-        background-color: red;
-        color: white;
+        background-color: #FFCD38;
+
         border: 0;
     } 
 }
 
 @media only screen and (min-width: 1024px){
     .bodyAddLine{
-        background-color: #3D505D;
+        background-color: #3F6866;
         width: 100vw;
         height: 100vh;
         padding-top: 7%;
