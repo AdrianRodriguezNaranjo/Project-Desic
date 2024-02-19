@@ -10,7 +10,7 @@ const LineList = () => {
   const [currentLine, setCurrentLine] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
-  const navigate=useNavigate()
+  const navigate=useNavigate();
 
   const retrieveLines = async () => {
     try {
@@ -41,12 +41,12 @@ const deleteLine =(id)=>{
   LineService.remove(id).then(response=>{
     retrieveLines();
   })
-  LineService.getAll()
+  LineService.getAll();
 }
 
 const updateLine=(l)=>{
-  localStorage.setItem("linea",JSON.stringify(l))
-  navigate("/update")
+  localStorage.setItem("linea",JSON.stringify(l));
+  navigate("/update");
 }
 
   return (

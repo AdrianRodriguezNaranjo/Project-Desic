@@ -14,4 +14,4 @@ function Lines(){
     );
 }
 
-export default Lines
+export default Lines;

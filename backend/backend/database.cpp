@@ -83,5 +83,13 @@ bool Database::createLineTable()
         return false;
     }
 
+    if (!query.exec("INSERT INTO line ("
+                    "number, firstbusstop, lastbusstop) VALUES"
+                    "('101', 'San Telmo', 'Teror'),"
+                    "('102', 'Valleseco', 'Teror');")) {
+        qDebug() << "Error: Failed to insert in line table:" << query.lastError().text();
+        return false;
+    }
+
     return true;
 }
