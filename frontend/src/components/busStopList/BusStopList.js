@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import BusStopService from "../../services/busStopService/BusStopService"
 import React, { useState, useEffect } from "react";
 import { Button, message, Popconfirm } from 'antd';
+import update from '../../assets/icons/update.svg';
+import deletea from '../../assets/icons/delete.svg';
 
 const BusStopList = () => {
   const [busStop, setBusStop] = useState([]);
@@ -48,12 +50,15 @@ const BusStopList = () => {
   }
 
   return (
-    <div className="container">
+    <div className='endofthepage'>
+    <div className="listBodyBusStop">
       {busStop.map((b, index) => {
         return (
           <div key={index} className="elementBody">
-            <h3>Paradas</h3>
-            <p>Localizacion: {b.location}</p>
+            <div className='textContainer'>
+            <h3>Localización:</h3>
+            <p> {b.location}</p>
+            </div>
             {/* <img src={`http://localhost:8080/images/${b.filename}`}></img> */}
             <Popconfirm
               title="Eliminar Linea"
@@ -62,13 +67,14 @@ const BusStopList = () => {
               onCancel={() => cancel()}
               okText="Si"
               cancelText="No">
-              <Button className="delButton">Eliminar</Button>
+              <Button className="delButton"><img src={deletea} alt="eliminar" /><br/>Eliminar</Button>
             </Popconfirm>
-            <Button onClick={() => updateBusStop(b)} className="updButton">Actualizar</Button>
+            <Button onClick={() => updateBusStop(b)} className="updButton"><img src={update} alt="Actualizar" /><br/>Actualizar</Button>
           </div>
         )
       })}
       <img src={addbutton} alt="Añadir" onClick={() => navigate(`/Line/${idLine}/addBusStop`)} className="buttonAdd" />
+    </div>
     </div>
   )
 }

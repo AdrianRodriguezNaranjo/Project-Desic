@@ -7,6 +7,7 @@ function HeaderBusStop() {
   const navigate=useNavigate()
   return (
     <div className="bodyHeader">
+      <div className='contentHeader'>
       <div className="back" onClick={()=>navigate(`/Line`)}>
         <img src={back} alt="Volver" />
       </div>
@@ -19,7 +20,8 @@ function HeaderBusStop() {
         </a>
       </div>
     </div>
+    </div>
   );
 }
 
-export default HeaderBusStop
+export default HeaderBusStop;

@@ -7,7 +7,6 @@ public:
     long           id;
     long           line_id;
     QString        location;
-    QString        imagenFilePath; //ruta de la imagen
 
     Bus_Stop() : id(1) { ; }
     virtual ~Bus_Stop() { ; }

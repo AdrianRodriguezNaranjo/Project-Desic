@@ -1,10 +1,11 @@
+import "./ScheduleList.css";
 import addbutton from "../../assets//icons/addbutton.svg";
 import { useNavigate, useParams } from "react-router-dom"
 import ScheduleService from "../../services/scheduleService/ScheduleService"
-import ReportService from "../../services/report/report.service";
 import React, { useState, useEffect } from "react";
 import { Button, message, Popconfirm } from 'antd';
-import { FilePdfOutlined } from '@ant-design/icons';
+import update from '../../assets/icons/update.svg';
+import deletea from '../../assets/icons/delete.svg';
 
 const ScheduleList = () => {
   const [schedules, setSchedule] = useState([]);
@@ -15,7 +16,6 @@ const ScheduleList = () => {
   const retrieveSchedule = async () => {
     try {
       const response = await ScheduleService.getAll(idLine);
-      localStorage.setItem('idLine',idLine);
       setSchedule(response);
       console.log(schedules);
     } catch (error) {
@@ -32,10 +32,6 @@ const ScheduleList = () => {
   const cancel = (e) => {
     console.log(e);
     message.error('Cancelado');
-  };
-
-  const onClick = (e) => {
-    ReportService.BusReportView();
   };
 
   useEffect(() => {
@@ -55,13 +51,16 @@ const ScheduleList = () => {
   }
 
   return (
-    <div className="container">
+    <div className="endofthepage">
+    <div className="listBodySchedule">
       {schedules.map((s, index) => {
         return (
           <div key={index} className="elementBody">
-            <h3>Horas de salida</h3>
+            <div className="textContainer">
+            <h3>Hora de salida:</h3>
             <p>{s.time}</p>
-
+            </div>
+            <div className="buttonContainer">
             <Popconfirm
               title="Eliminar Linea"
               description="Estas seguro de que quieres eliminar esta hora?"
@@ -69,14 +68,15 @@ const ScheduleList = () => {
               onCancel={() => cancel()}
               okText="Si"
               cancelText="No">
-              <Button className="delButton">Eliminar</Button>
+              <Button className="delButton"><img src={deletea} alt="eliminar" /><br/>Eliminarr</Button>
             </Popconfirm>
-            <Button onClick={() => updateSchedule(s)} className="updButton">Actualizar</Button>
+            <Button onClick={() => updateSchedule(s)} className="updButton"><img src={update} alt="Actualizar" /><br/>Actualizar</Button>
+          </div>
           </div>
         )
       })}
-      <FilePdfOutlined onClick={onClick} />
       <img src={addbutton} alt="Añadir" onClick={() => navigate(`/Line/${idLine}/addSchedule`)} className="buttonAdd" />
+    </div>
     </div>
   )
 }

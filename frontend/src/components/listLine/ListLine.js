@@ -6,6 +6,8 @@ import ReportService from "../../services/report/report.service";
 import { useNavigate } from "react-router-dom";
 import { Button, message, Popconfirm } from 'antd';
 import { FilePdfOutlined } from '@ant-design/icons';
+import update from '../../assets/icons/update.svg';
+import deletea from '../../assets/icons/delete.svg';
 
 const LineList = () => {
   const [lines, setLines] = useState([]);
@@ -56,29 +58,34 @@ const LineList = () => {
   }
 
   return (
-    <div className="listBody">
+    <div className="endofthepage">
+    <div className="listBodyLines">
       {lines.map((l, index) => {
         return (
-          <div key={index} className="elementBody" >
-            <div className="buttonSchedule" onClick={() => navigate(`/Line/${l.id}/schedule`)}>
+          <div key={index} className="elementBody">
+            <div className="textContainer" onClick={()=>navigate(`/Line/${l.id}/schedule`)}>
               <h3>Línea: {l.number}</h3>
               <p>{l.firstbusstop} - {l.lastbusstop}</p>
             </div>
-            <Popconfirm
-              title="Eliminar Linea"
-              description="Estas seguro de que quieres eliminar esta linea?"
-              onConfirm={() => confirm(l.id)}
-              onCancel={() => cancel()}
-              okText="Si"
-              cancelText="No">
-              <Button className="delButton">Eliminar</Button>
-            </Popconfirm>
-            <Button onClick={() => updateLine(l)} className="updButton">Actualizar</Button>
+            <div className="buttonContainer">
+              <Popconfirm
+                title="Eliminar Linea"
+                description="Estas seguro de que quieres eliminar esta linea?"
+                onConfirm={() => confirm(l.id)}
+                onCancel={() => cancel()}
+                okText="Si"
+                cancelText="No"
+              >
+              <Button className="delButton"><img src={deletea} alt="eliminar" /><br/>Eliminar</Button>
+              </Popconfirm>
+              <Button onClick={() => updateLine(l)} className="updButton"><img src={update} alt="Actualizar" /><br/>Actualizar</Button>
+            </div>
           </div>
         )
       })}
       <FilePdfOutlined onClick={onClick} />
       <img src={addbutton} alt="Añadir" onClick={() => navigate("/addLine")} className="buttonAdd" />
+    </div>
     </div>
   );
 };

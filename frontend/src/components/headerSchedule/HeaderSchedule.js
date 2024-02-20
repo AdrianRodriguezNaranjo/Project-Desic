@@ -8,6 +8,7 @@ function HeaderSchedule() {
   const navigate = useNavigate()
   return (
     <div className="bodyHeader">
+      <div className='contentHeader'>
       <div className="back" onClick={() => navigate(`/Line`)}>
         <img src={back} alt="Volver" />
       </div>
@@ -19,7 +20,7 @@ function HeaderSchedule() {
         <img src={help} alt="Ayuda" />
         </a>
       </div>
-
+      </div>
     </div>
   );
 }

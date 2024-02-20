@@ -1,4 +1,4 @@
-.bodyFooter {
+/* .bodyFooterSB {
   background-color: #b6d101;
   display: flex;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   position: fixed;
   z-index: 100;
   border: 1px solid black;
-}
+} */
 
 .scheduleHour {
   display: table-column;
@@ -19,7 +19,7 @@
   padding-top: 3px;
   width: 33%;
   height: 100%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .scheduleBus {
@@ -30,7 +30,7 @@
   padding-top: 3px;
   width: 33%;
   height: 100%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .scheduleUser {
@@ -41,5 +41,5 @@
   padding-top: 3px;
   width: 33%;
   height: 100%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }

@@ -4,6 +4,7 @@ import help from '../../assets/icons/help.svg';
 function Header() {
   return (
     <div className="bodyHeader">
+      <div className='contentHeader'>
       <div className="pageTitle">
         <h1>Líneas</h1>
       </div>
@@ -13,7 +14,8 @@ function Header() {
       </a>
       </div>
     </div>
+    </div>
   );
 }
 
-export default Header
+export default Header;

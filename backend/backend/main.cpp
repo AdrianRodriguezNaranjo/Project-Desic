@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
     // Parameters to connect to the PostgreSQL database
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
-    db.setDatabaseName("bus");
+    db.setDatabaseName("Prueba");
     db.setUserName("postgres");
-    db.setPassword("alumno");
+    db.setPassword("admin");
 
     // Open the connection to the database
     if (!db.open()) {
@@ -540,7 +540,6 @@ int main(int argc, char *argv[])
                 busStop.id = query.value("id").toLongLong();
                 busStop.line_id = query.value("line_id").toLongLong();
                 busStop.location = query.value("location").toString();
-                busStop.imagenFilePath = query.value("imagenFilePath").toString();
                 busStopList.append(busStop);
             }
 
@@ -551,7 +550,6 @@ int main(int argc, char *argv[])
                 jsonObject["id"] = static_cast<qint64>(busStop.id);
                 jsonObject["line_id"] = static_cast<qint64>(busStop.line_id);
                 jsonObject["location"] = busStop.location;
-                jsonObject["imagenFilePath"] = busStop.imagenFilePath;
                 jsonArray.append(jsonObject);
             }
             QJsonDocument jsonDocument(jsonArray);
@@ -611,18 +609,16 @@ int main(int argc, char *argv[])
         [](const QHttpServerRequest &request)
         {
             const auto json = byteArrayToJsonObject(request.body());
-            if (!json || !json->contains("line_id") || !json->contains("location") || !json->contains("imagenFilePath"))
+            if (!json || !json->contains("line_id") || !json->contains("location"))
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
             QSharedPointer<Bus_Stop> newBusStop(new Bus_Stop());
             newBusStop->line_id = json->value("line_id").toInt();
             newBusStop->location = json->value("location").toString();
-            newBusStop->imagenFilePath = json->value("imagenFilePath").toString();
             QSqlQuery insertQuery;
-            insertQuery.prepare("INSERT INTO bus_stop (line_id, location, imagenFilePath) "
-                                "VALUES (:line_id, :location, :imagenFilePath)");
+            insertQuery.prepare("INSERT INTO bus_stop (line_id, location) "
+                                "VALUES (:line_id, :location)");
             insertQuery.bindValue(":line_id", static_cast<int>(newBusStop->line_id));
             insertQuery.bindValue(":location", newBusStop->location);
-            insertQuery.bindValue(":imagenFilePath", newBusStop->imagenFilePath);
             if (!insertQuery.exec()) {
                 qDebug() << "Error: Failed to insert bus stop:" << insertQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
@@ -646,15 +642,14 @@ int main(int argc, char *argv[])
         [](qint64 busStopId, const QHttpServerRequest &request)
         {
             const auto json = byteArrayToJsonObject(request.body());
-            if (!json || !json->contains("line_id") || !json->contains("location") || !json->contains("imagenFilePath"))
+            if (!json || !json->contains("line_id") || !json->contains("location"))
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
 
             QSqlQuery updateQuery;
-            updateQuery.prepare("UPDATE bus_stop SET line_id = :line_id, location = :location, imagenFilePath = :imagenFilePath WHERE id = :id");
+            updateQuery.prepare("UPDATE bus_stop SET line_id = :line_id, location = :location WHERE id = :id");
             updateQuery.bindValue(":id", busStopId);
             updateQuery.bindValue(":line_id", json->value("line_id").toInt());
             updateQuery.bindValue(":location", json->value("location").toString());
-            updateQuery.bindValue(":imagenFilePath", json->value("imagenFilePath").toString());
             if (!updateQuery.exec()) {
                 qDebug() << "Error: Failed to update bus stop:" << updateQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
@@ -699,7 +694,6 @@ int main(int argc, char *argv[])
                 busStop.id = query.value("id").toLongLong();
                 busStop.line_id = query.value("line_id").toLongLong();
                 busStop.location = query.value("location").toString();
-                busStop.imagenFilePath = query.value("imagenFilePath").toString();
                 busStopList.append(busStop);
             }
 
@@ -709,7 +703,6 @@ int main(int argc, char *argv[])
                 jsonObject["id"] = static_cast<qint64>(busStop.id);
                 jsonObject["line_id"] = static_cast<qint64>(busStop.line_id);
                 jsonObject["location"] = busStop.location;
-                jsonObject["imagenFilePath"] = busStop.imagenFilePath;
                 jsonArray.append(jsonObject);
             }
             QJsonDocument jsonDocument(jsonArray);
@@ -738,7 +731,6 @@ int main(int argc, char *argv[])
                 jsonObject["id"] = static_cast<qint64>(query.value("id").toLongLong());
                 jsonObject["line_id"] = static_cast<qint64>(query.value("line_id").toLongLong());
                 jsonObject["location"] = query.value("location").toString();
-                jsonObject["imagenFilePath"] = query.value("imagenFilePath").toString();
 
                 QJsonDocument jsonDocument(jsonObject);
                 QByteArray responseData = jsonDocument.toJson();
@@ -763,19 +755,17 @@ int main(int argc, char *argv[])
         [](qint64 lineId, const QHttpServerRequest &request)
         {
             const auto json = byteArrayToJsonObject(request.body());
-            if (!json || !json->contains("location") || !json->contains("imagenFilePath"))
+            if (!json || !json->contains("location"))
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
 
             QSharedPointer<Bus_Stop> newBusStop(new Bus_Stop());
             newBusStop->line_id = lineId;
             newBusStop->location = json->value("location").toString();
-            newBusStop->imagenFilePath = json->value("imagenFilePath").toString();
             QSqlQuery insertQuery;
-            insertQuery.prepare("INSERT INTO bus_stop (line_id, location, imagenFilePath) "
-                                "VALUES (:line_id, :location, :imagenFilePath)");
+            insertQuery.prepare("INSERT INTO bus_stop (line_id, location) "
+                                "VALUES (:line_id, :location)");
             insertQuery.bindValue(":line_id", static_cast<int>(newBusStop->line_id));
             insertQuery.bindValue(":location", newBusStop->location);
-            insertQuery.bindValue(":imagenFilePath", newBusStop->imagenFilePath);
             if (!insertQuery.exec()) {
                 qDebug() << "Error: Failed to insert schedule:" << insertQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
@@ -798,15 +788,14 @@ int main(int argc, char *argv[])
         [](qint64 lineId, qint64 busStopId, const QHttpServerRequest &request)
         {
             const auto json = byteArrayToJsonObject(request.body());
-            if (!json || !json->contains("location") || !json->contains("imagenFilePath"))
+            if (!json || !json->contains("location"))
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::BadRequest);
 
             QSqlQuery updateQuery;
-            updateQuery.prepare("UPDATE bus_stop SET line_id = :line_id, location = :location, imagenFilePath = :imagenFilePath WHERE id = :id");
+            updateQuery.prepare("UPDATE bus_stop SET line_id = :line_id, location = :location WHERE id = :id");
             updateQuery.bindValue(":id", busStopId);
             updateQuery.bindValue(":line_id", lineId);
             updateQuery.bindValue(":location", json->value("location").toString());
-            updateQuery.bindValue(":imagenFilePath", json->value("imagenFilePath").toString());
             if (!updateQuery.exec()) {
                 qDebug() << "Error executing query:" << updateQuery.lastError().text();
                 return QHttpServerResponse(QHttpServerResponder::StatusCode::InternalServerError);
