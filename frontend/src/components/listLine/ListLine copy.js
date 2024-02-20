@@ -2,7 +2,7 @@ import "./ListLine.css";
 import addbutton from "../../assets//icons/addbutton.svg";
 import React, { useState, useEffect } from "react";
 import LineService from "../../services/linesServices/LineService";
-import ReportService from "../../services/report/report.service";
+// import ReportService from "../../services/report/report.service";
 import { useNavigate } from "react-router-dom";
 import { Button, message, Popconfirm } from 'antd';
 import { FilePdfOutlined } from '@ant-design/icons';
@@ -39,9 +39,9 @@ const LineList = () => {
     message.error('Cancelado');
   };
 
-  const onClick = (e) => {
-    ReportService();
-  };
+  // const onClick = (e) => {
+  //   ReportService();
+  // };
 
   const deleteLine = (id) => {
     LineService.remove(id).then(response => {
@@ -77,7 +77,7 @@ const LineList = () => {
           </div>
         )
       })}
-      <FilePdfOutlined onClick={onClick} />
+      {/* <FilePdfOutlined onClick={onClick} /> */}
       <img src={addbutton} alt="Añadir" onClick={() => navigate("/addLine")} className="buttonAdd" />
     </div>
   );

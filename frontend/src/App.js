@@ -10,14 +10,15 @@ import UpdateSchedule from "./components/scheduleUpdate/ScheduleUpdate";
 import AddBusStop from "./components/busStopAdd/BusStopAdd";
 import UpdateBusStop from "./components/busStopUpdate/BusStopUpdate";
 import BusStop from "./pages/busStop/BusStop";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Lines />} />
-        {/* <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
+        <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/Line" element={<Lines />} />
         <Route path='/Line/:idLine/schedule' element={<Schedule />} />

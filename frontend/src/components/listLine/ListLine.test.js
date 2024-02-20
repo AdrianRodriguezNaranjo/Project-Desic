@@ -3,32 +3,38 @@ import { act, render, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ListLine from './ListLine';
 import LineService from '../../services/linesServices/LineService';
+import ReportService from "../../services/report/report.service";
 
-jest.mock('../../services/linesServices/LineService');
+jest.mock('../../services/linesServices/LineService', () => ({
+  getAll: jest.fn()
+}));
+
+jest.mock('../../services/report/report.service', () => {
+  ReportService: "../../assets/report.pdf"
+});
 
 describe('ListLine', () => {
-  beforeEach(() => {
-    LineService.getAll.mockResolvedValue([
-      { id: 1, number: '101', firstbusstop: 'San Telmo', lastbusstop: 'Teror' },
-      { id: 2, number: '102', firstbusstop: 'Valleseco', lastbusstop: 'Teror' },
-    ]);
-
-    LineService.remove.mockResolvedValueOnce();
-  });
-
+  // beforeEach(() => {
+ 
+  // });
+  LineService.getAll.mockResolvedValue([
+    { id: 1, number: '1', firstbusstop: 'primera', lastbusstop: 'segunda' },
+    { id: 2, number: '2', firstbusstop: 'primera', lastbusstop: 'tercera' },
+  ]);
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders ListLine component with lines', async () => {
+
     const { getByText } = render(
       <MemoryRouter>
         <ListLine />
       </MemoryRouter>
     );
     await waitFor(() => {
-      expect(getByText('Línea: 101')).toBeInTheDocument();
-      expect(getByText('Línea: 102')).toBeInTheDocument();
+      expect(getByText('Línea: 1')).toBeInTheDocument();
+      expect(getByText('Línea: 2')).toBeInTheDocument();
     });
   });
 
