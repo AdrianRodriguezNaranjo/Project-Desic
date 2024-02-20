@@ -56,8 +56,8 @@ const BusStopList = () => {
         return (
           <div key={index} className="elementBody">
             <div className='textContainer'>
-            <h3>Paradas</h3>
-            <p>Localizacion: {b.location}</p>
+            <h3>Localización:</h3>
+            <p> {b.location}</p>
             </div>
             {/* <img src={`http://localhost:8080/images/${b.filename}`}></img> */}
             <Popconfirm

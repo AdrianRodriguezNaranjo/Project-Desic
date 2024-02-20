@@ -49,7 +49,6 @@ bool Database::createLineTable()
                     "id SERIAL PRIMARY KEY,"
                     "line_id INT,"
                     "location VARCHAR(255),"
-                    "imagenFilePath VARCHAR(255),"
                     "FOREIGN KEY (line_id) REFERENCES line(id) ON DELETE CASCADE"
                     ")")) {
         qDebug() << "Error: Failed to create the bus_stop table:" << query.lastError().text();
@@ -80,6 +79,14 @@ bool Database::createLineTable()
                     "FOREIGN KEY (line_id) REFERENCES line(id) ON DELETE CASCADE"
                     ")")) {
         qDebug() << "Error: Failed to create the user_lines table:" << query.lastError().text();
+        return false;
+    }
+
+    if (!query.exec("INSERT INTO line ("
+                    "number, firstbusstop, lastbusstop) VALUES"
+                    "('101', 'San Telmo', 'Teror'),"
+                    "('102', 'Valleseco', 'Teror');")) {
+        qDebug() << "Error: Failed to insert in line table:" << query.lastError().text();
         return false;
     }
 

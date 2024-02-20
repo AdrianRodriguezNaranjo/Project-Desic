@@ -1,7 +1,7 @@
 import BusStopService from "../../services/busStopService/BusStopService";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
-import { Button, message, Popconfirm, notification } from "antd";
+import { Button, message, Popconfirm, notification, Input } from "antd";
 import HeaderBusStop from "../headerBusStop/HeaderBusStop";
 import FooterBusStop from "../footerBusStop/FooterBusStop";
 
@@ -10,8 +10,7 @@ const UpdateBusStop = () => {
 
   const navigate = useNavigate();
   const { idLine } = useParams();
-  const busStopRef = useRef(null);
-  const fileInputRef = useRef(null);
+  const busStopRef = useRef(b.location);
   const [submitted, setSubmitted] = useState(false);
 
   const confirm = (id) => {
@@ -27,13 +26,11 @@ const UpdateBusStop = () => {
 
   const updateBusStop = () => {
     var data = {
-      Location: busStopRef.current.value,
-      file: fileInputRef.current.files[0]
+      location: busStopRef.current.value
     };
     const locationD = busStopRef.current.value
-    const fileD = fileInputRef.current.value
 
-    if (locationD === null || locationD === '' || fileD === null || fileD === '') {
+    if (locationD === null || locationD === '') {
       notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
     } else {
       BusStopService.update(b.id, idLine, data)
@@ -57,15 +54,6 @@ const UpdateBusStop = () => {
             ref={busStopRef}
           />
 
-          <label htmlFor="filename">Imagen</label>
-          <input
-            type="file"
-            className="form-control"
-            id="filename"
-            required
-            name="filename"
-            ref={fileInputRef}
-          />
           <Popconfirm
             title="Actualizar Linea"
             description="Estas seguro de que quieres actualizar esta parada?"

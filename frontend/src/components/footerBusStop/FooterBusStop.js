@@ -20,7 +20,7 @@ function FooterBusStop() {
   };
 
   return (
-    <div className="bodyFooter">
+    <div className="bodyFooterSB">
         <div className='busstopHour'onClick={()=>navigate(`/Line/${idLine}/schedule`)}>
         <img src={hour} alt="Horas" />
         <p>Horario</p>

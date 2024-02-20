@@ -57,7 +57,7 @@ const ScheduleList = () => {
         return (
           <div key={index} className="elementBody">
             <div className="textContainer">
-            <h3>Horas de salida</h3>
+            <h3>Hora de salida:</h3>
             <p>{s.time}</p>
             </div>
             <div className="buttonContainer">

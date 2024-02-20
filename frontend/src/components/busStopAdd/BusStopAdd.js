@@ -12,24 +12,22 @@ const AddBusStop = () => {
   const navigate = useNavigate();
   const { idLine } = useParams();
   const busStopRef = useRef(null);
-  const fileInputRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
 
   const saveBusStop = () => {
     var data = {
-      location: busStopRef.current.value === '' ? null : busStopRef.current.value,
-      file: fileInputRef.current.value === '' ? null : fileInputRef.current.files[0],
+      location: busStopRef.current.value === '' ? null : busStopRef.current.value
     };
 
-    const locationD = busStopRef.current.value
-    const fileD = fileInputRef.current.value
+    const locationD = busStopRef.current.value;
 
-    if (locationD === null || locationD === '' || fileD === null || fileD === '') {
+    if (locationD === null || locationD === '') {
       notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
     } else {
+      console.log(data);
       BusStopService.create(idLine, data)
         .then(response => {
-          navigate(`/Line/${idLine}/BusStop`)
+          navigate(`/Line/${idLine}/BusStop`);
         })
     };
 
@@ -40,24 +38,13 @@ const AddBusStop = () => {
       <div className="bodyAddLine">
         <form className="form-group" >
           <label htmlFor="Location">Localizacion</label>
-          <Input
+          <input
             type="text"
             className="form-control"
             id="Location"
             required
             name="Location"
             ref={busStopRef}
-            defaultValue={null}
-          />
-
-          <label htmlFor="filename">Imagen</label>
-          <Input
-            type="file"
-            className="form-control"
-            id="filename"
-            required
-            name="filename"
-            ref={fileInputRef}
             defaultValue={null}
           />
           <Button onClick={() => saveBusStop()} className="btn btn-success">
