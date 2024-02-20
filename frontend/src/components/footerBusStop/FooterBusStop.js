@@ -45,4 +45,4 @@ function FooterBusStop() {
   );
 }
 
-export default FooterBusStop
+export default FooterBusStop;

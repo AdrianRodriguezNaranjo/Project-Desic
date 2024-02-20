@@ -55,7 +55,7 @@ const AddLine = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="lastStop">Ultima parada</label>
+          <label htmlFor="lastStop">Última parada</label>
           <Input
             type="text"
             id="lastStop"

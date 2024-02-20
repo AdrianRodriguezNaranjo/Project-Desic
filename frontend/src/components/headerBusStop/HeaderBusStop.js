@@ -24,4 +24,4 @@ function HeaderBusStop() {
   );
 }
 
-export default HeaderBusStop
+export default HeaderBusStop;
