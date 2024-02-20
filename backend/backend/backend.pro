@@ -4,7 +4,7 @@ TEMPLATE = app
 DEFINES += _BUILDING_QX_BUS
 INCLUDEPATH += ../../../../../QxOrm/include/
 DESTDIR = ../../../../../QxOrm/test/_bin/
-LIBS += -L"../../../../../QxOrm/lib"
+LIBS += -L"$$PWD/../../../../lib"
 
 !contains(DEFINES, _QX_NO_PRECOMPILED_HEADER) {
 PRECOMPILED_HEADER = ./precompiled.h
@@ -49,3 +49,4 @@ HEADERS += \
     precompiled.h \
     schedule.h \
     user_lines.h
+

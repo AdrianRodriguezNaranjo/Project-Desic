@@ -25,6 +25,11 @@ bool Database::createLineTable()
         return false;
     }
 
+    if (!query.exec("DROP TABLE IF EXISTS bus_stop")) {
+        qDebug() << "Error: Failed to drop the bus_stop table:" << query.lastError().text();
+        return false;
+    }
+
     if (!query.exec("CREATE TABLE IF NOT EXISTS line ("
                     "id SERIAL PRIMARY KEY,"
                     "number int,"
