@@ -1,0 +1,39 @@
+.bodyFooter {
+    /* background-color: #F5F0F6; */
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    position: fixed;
+    z-index: 100;
+    /* border: 1px solid black; */
+}
+
+.user {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50%;
+    padding: 0.5rem;
+    width: 8rem;
+    /* border: 1px solid red; */
+    border-radius: 90px;
+    background-color: #FE4A49;
+    /* border-left: 2px solid black; */
+}
+
+.user p {
+    margin: 0;
+}
+
+.user img {
+    width: 12%;
+    justify-content: center;
+    display: flex;
+}
