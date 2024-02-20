@@ -18,15 +18,20 @@ In the following section, we will discuss the aspects of the entity-relationship
 
 ### Entity-relationship
 ![Entidad relacion](https://github.com/JoelMartinHernandez/Proyecto-Desic/assets/131310480/53c42eb9-d4bf-418d-b028-d10c292cd152)
-The "Users" table contains the fields ID, username, password, name, and discriminator(this controls the roles of the users)
+### The "Users" table contains the fields ID, username, password, name, and discriminator(this controls the roles of the users)
+this table contains the information of the users cas name, password and username.
 
-The "Lines" table contains the ID, number, firstBusStop, LastBusStop
+### The "Lines" table contains the ID, number, firstBusStop, LastBusStop
+the table line contains the information of each line and what is the Started bus stop and what is the last stop od this line.
 
-The "Users_Lines" table is created based on the many-to-many relationship between the "Users" and "Lines" tables. This table contains "UsersID," which is the primary key of the "Users" table, and "LinesID," which is the primary key of the "Lines" table.
+### The "Users_Lines" table is created based on the many-to-many relationship between the "Users" and "Lines" tables. This table contains "UsersID," which is the primary key of the "Users" table, and "LinesID," which is the primary key of the "Lines" table.
+this one is the table with relaciona the table user and lines by the relationship of many to many.
 
-The "Schedule" table contains the fields ID, HourAndMinutes, and LinesID, which is the primary key of the "Lines" table.
+### The "Schedule" table contains the fields ID, HourAndMinutes, and LinesID, which is the primary key of the "Lines" table.
+this table contains the schedule of each line showing the hour.
 
-The "BusStops" table contains the fields ID, Location, and LinesID, which is the primary key of the "Lines" table.
+### The "BusStops" table contains the fields ID, Location, and LinesID, which is the primary key of the "Lines" table.
+this table contains the stops of each line showing the location
 
 ### Class diagram
 ![Diagrama de clases2 Desic](https://github.com/JoelMartinHernandez/Proyecto-Desic/assets/131310480/68aa25d2-4986-41cc-8687-fc7c62cd539f)
@@ -35,8 +40,13 @@ The "BusStops" table contains the fields ID, Location, and LinesID, which is the
 ![Diagrama de casos](https://github.com/JoelMartinHernandez/Proyecto-Desic/assets/131310480/20ddb853-f22f-4040-b69c-d6bc75a1658d)
 
 # Endpoints
+[Postman](https://documenter.getpostman.com/view/29808712/2sA2r9Wi9v)
 
 # User requirement
+The aplication aprobe with functions to navigate in each lines, explore the schedule and the bus stop.
+
+This aplication is designed to the administrator, but the users can use the aplication normaly without the administrator role.
+
 The aplication works in web in particular on mobile.
 > [!IMPORTANT]
 > It is possible to use the application on desktop but it is not intended for desktop use.
@@ -74,7 +84,7 @@ If you now want to start everything you need to execute the backend with Qt, and
 
 When you run npm start on the frontend, the application will be opened.
 > [!NOTE]
-> When you open only the application without the backend, as it is a web application, it is normal that it does not work because you can not log in.
+> When you open only the application without the backend, as it is a web application, it is normal that it does not work.
 
 
 ## User/Technician installation
