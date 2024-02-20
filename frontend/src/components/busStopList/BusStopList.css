@@ -1,0 +1,77 @@
+.endofthepage {
+    background-color: #F5F0F6;
+    height: 100%;
+  }
+  
+  .listBodyBusStop {
+    background-color: #F5F0F6;
+    border-radius: 25px;
+    padding-top: 100px;
+    padding-bottom: 70px;
+    z-index: 10;
+  }
+  
+  .elementBody{
+    display: flex; /* Crear una fila */
+    background-color: #32292F;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    flex-direction: column; /* Alinear los botones en una columna */
+    justify-content: flex-start; /* Alinear los botones en la parte superior */
+    align-items: flex-end; /* Alinear los botones a la derecha */
+    padding: 10px; /* Ajustar el espacio interior */
+  }
+  
+  .elementBody>button{
+    width: auto; /* Ancho automático para los botones */
+  }
+  
+  .textContainer {
+    flex: 1; /* La primera columna ocupa todo el espacio disponible */
+    padding: 5px; /* Ajustar el espacio interior */
+    width: 50%;
+  }
+  
+  
+  .delButton{
+    background-color: transparent;
+  color: white;
+  border: none;
+  margin-top: 2px; /* Ajustar el espacio entre los botones */
+  cursor: pointer;
+  }
+  
+  .updButton{
+    /* display: flex;
+    background-color: rgb(220, 253, 3);
+    color: black;
+    border: none;
+    z-index: 50; */
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin-top: 30px; /* Ajustar el espacio entre los botones */
+    cursor: pointer;
+  }
+  
+  .delButton:hover,
+  .updButton:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Cambiar el color de fondo al hacer hover */
+  }
+  
+  .buttonAdd{
+   margin-left: 75%;
+  }
+  
+  .buttonsActions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+  }
