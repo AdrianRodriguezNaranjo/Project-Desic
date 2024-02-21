@@ -83,7 +83,7 @@ const LineList = () => {
           </div>
         )
       })}
-      <FilePdfOutlined onClick={onClick} />
+      {/* <FilePdfOutlined onClick={onClick} /> */}
       <img src={addbutton} alt="Añadir" onClick={() => navigate("/addLine")} className="buttonAdd" />
     </div>
     </div>

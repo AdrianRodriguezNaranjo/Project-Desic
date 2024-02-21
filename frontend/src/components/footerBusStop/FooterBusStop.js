@@ -2,6 +2,7 @@ import './FooterBusStop.css'
 import user from '../../assets/icons/user.svg';
 import bus from '../../assets/icons/bus.svg';
 import hour from '../../assets/icons/hour.svg';
+import chat from '../../assets/icons/chat.svg';
 import { useNavigate, useParams } from "react-router-dom";
 import { message, Popconfirm } from 'antd';
 
@@ -28,6 +29,10 @@ function FooterBusStop() {
         <div className='busstopBus' onClick={()=>navigate(`/Line/${idLine}/BusStop`)}>
         <img src={bus} alt="Paradas" />
         <p>Paradas</p>
+        </div>
+        <div className='busstopChat' onClick={()=>navigate(`/chat`)}>
+        <img src={chat} alt="chat" />
+        <p>Chat</p>
         </div>
       <Popconfirm
         title="Cerrar sesion"

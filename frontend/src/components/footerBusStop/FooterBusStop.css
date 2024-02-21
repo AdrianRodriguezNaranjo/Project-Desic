@@ -1,7 +1,7 @@
 .bodyFooterSB {
     background-color: #32292F;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 10%;
@@ -9,37 +9,88 @@
     position: fixed;
     z-index: 100;
     border-radius: 30px 30px 0 0;
+    color: white;
   }
   
   .busstopHour {
-    display: table-column;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ height: 50%;
+ padding: 0.5rem;
+ width: 8rem;
+  }
+
+  .busstopHour p{
+    margin: 0;
+  }
+
+  .busstopHour img{
+    width: 30%;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
+    display: flex;
   }
   
   .busstopBus {
-    display: table-column;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+  }
+
+  .busstopBus p{
+    margin: 0;
+  }
+
+  .busstopBus img{
+    width: 30%;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
+    display: flex;
   }
   
   .busstopUser {
-    display: table-column;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ height: 50%;
+ padding: 0.5rem;
+ width: 8rem;
+  }
+
+  .busstopUser p{
+    margin: 0;
+  }
+
+  .busstopUser img{
+    width: 30%;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
+    display: flex;
+  }
+
+  .busstopChat {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ height: 50%;
+ width: 8rem;
+  }
+
+  .busstopChat p{
+    margin: 0;
+  }
+
+  .busstopChat img{
+    width: 30%;
+    justify-content: center;
+    display: flex;
   }

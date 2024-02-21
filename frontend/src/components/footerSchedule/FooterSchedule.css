@@ -1,45 +1,97 @@
-/* .bodyFooterSB {
-  background-color: #b6d101;
+.bodyFooterSB {
+  background-color: #32292F;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 10%;
   bottom: 0;
   position: fixed;
   z-index: 100;
-  border: 1px solid black;
-} */
+  border-radius: 30px 30px 0 0;
+  color: white;
+}
 
 .scheduleHour {
-  display: table-column;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 3px;
-  width: 33%;
-  height: 100%;
-  /* border: 2px solid black; */
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.scheduleHour p{
+  margin: 0;
+}
+
+.scheduleHour img{
+  width: 30%;
+  justify-content: center;
+  display: flex;
 }
 
 .scheduleBus {
-  display: table-column;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 3px;
-  width: 33%;
-  height: 100%;
-  /* border: 2px solid black; */
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.scheduleBus p{
+  margin: 0;
+}
+
+.scheduleBus img{
+  width: 30%;
+  justify-content: center;
+  display: flex;
 }
 
 .scheduleUser {
-  display: table-column;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 3px;
-  width: 33%;
-  height: 100%;
-  /* border: 2px solid black; */
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.scheduleUser p{
+  margin: 0;
+}
+
+.scheduleUser img{
+  width: 30%;
+  justify-content: center;
+  display: flex;
+}
+
+.scheduleChat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.scheduleChat p{
+  margin: 0;
+}
+
+.scheduleChat img{
+  width: 30%;
+  justify-content: center;
+  display: flex;
 }
