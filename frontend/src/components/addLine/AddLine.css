@@ -71,3 +71,7 @@
         padding-top: 7%;
     }
 }
+
+.error {
+    border-color: red;
+  }

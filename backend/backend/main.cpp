@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     db.setHostName("localhost");
     db.setDatabaseName("Prueba");
     db.setUserName("postgres");
-    db.setPassword("admin");
+    db.setPassword("alumno");
 
     // Open the connection to the database
     if (!db.open()) {
