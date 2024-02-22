@@ -1,0 +1,12 @@
+.endofthepage {
+    background-color: #F5F0F6;
+    height: 100%;
+  }
+  
+  .listBody {
+    background-color: #F5F0F6;
+    border-radius: 25px;
+    padding-top: 120px;
+    padding-bottom: 70px;
+    z-index: 10;
+  }

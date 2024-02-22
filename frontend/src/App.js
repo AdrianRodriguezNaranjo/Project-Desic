@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<LoginForm />} />
         {/* <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} /> */}
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/Line/:idLine/chat" element={<Chat />} />
         <Route path="/Line" element={<Lines />} />
         <Route path='/Line/:idLine/schedule' element={<Schedule />} />
         <Route path="/Line/:idLine/addSchedule" element={<AddSchedule />} />

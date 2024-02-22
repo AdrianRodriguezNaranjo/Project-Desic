@@ -30,7 +30,7 @@ function FooterBusStop() {
         <img src={bus} alt="Paradas" />
         <p>Paradas</p>
         </div>
-        <div className='busstopChat' onClick={()=>navigate(`/chat`)}>
+        <div className='busstopChat' onClick={()=>navigate(`/Line/${idLine}/chat`)}>
         <img src={chat} alt="chat" />
         <p>Chat</p>
         </div>

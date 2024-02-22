@@ -30,7 +30,7 @@ function FooterSchedule() {
         <img src={bus} alt="Paradas" />
         <p>Paradas</p>
         </div>
-        <div className='scheduleChat' onClick={()=>navigate(`/chat`)}>
+        <div className='scheduleChat' onClick={()=>navigate(`/Line/${idLine}/chat`)}>
         <img src={chat} alt="chat" />
         <p>Chat</p>
         </div>
