@@ -7,8 +7,6 @@ import LineService from '../../services/linesServices/LineService';
 jest.mock('../../services/linesServices/LineService', () => ({
   getAll: jest.fn(),
   create: jest.fn(),
-  update: jest.fn(),
-  remove: jest.fn()
 }));
 
 describe('AddLine', () => {

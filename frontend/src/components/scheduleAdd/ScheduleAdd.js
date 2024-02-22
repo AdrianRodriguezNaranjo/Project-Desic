@@ -50,6 +50,7 @@ const AddSchedule = () => {
             name="number"
             ref={schedulesRef}
             defaultValue={null}
+            data-testid="HourAndMinutes"
           />
           <Button onClick={saveSchedule} className="btn btn-success">
             Guardar

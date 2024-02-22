@@ -11,15 +11,15 @@ const AddBusStop = () => {
 
   const navigate = useNavigate();
   const { idLine } = useParams();
-  const busStopRef = useRef(null);
+  const location = useRef(null);
   const [submitted, setSubmitted] = useState(false);
 
   const saveBusStop = () => {
     var data = {
-      location: busStopRef.current.value === '' ? null : busStopRef.current.value
+      location: location.current.value === '' ? null : location.current.value
     };
 
-    const locationD = busStopRef.current.value;
+    const locationD = location.current.value;
 
     if (locationD === null || locationD === '') {
       notification.error({ message: 'Ha ocurrido un error', description: 'Comprueba que todos los campos esten rellenados', duration: 5 })
@@ -37,15 +37,16 @@ const AddBusStop = () => {
       <HeaderBusStop />
       <div className="bodyAddLine">
         <form className="form-group" >
-          <label htmlFor="Location">Localizacion</label>
+          <label htmlFor="Location">Localización</label>
           <input
             type="text"
             className="form-control"
             id="Location"
             required
             name="Location"
-            ref={busStopRef}
-            defaultValue={null}
+            ref={location}
+            // defaultValue={null}
+            placeholder="Localización"
           />
           <Button onClick={() => saveBusStop()} className="btn btn-success">
             Guardar

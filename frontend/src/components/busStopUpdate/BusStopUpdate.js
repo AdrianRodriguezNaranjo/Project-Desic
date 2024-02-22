@@ -44,7 +44,7 @@ const UpdateBusStop = () => {
       <HeaderBusStop />
       <div className="bodyAddLine">
         <form className="form-group" >
-          <label htmlFor="Location">Localizacion</label>
+          <label htmlFor="Location">Localización</label>
           <input
             type="text"
             className="form-control"

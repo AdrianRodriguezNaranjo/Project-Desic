@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, fireEvent, waitFor, getByTestId } from '@testing-library/react';
+import { act, render, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ListLine from './ListLine';
 import LineService from '../../services/linesServices/LineService';
@@ -45,24 +45,7 @@ describe('ListLine', () => {
     });
   });
 
-  // it('deletes a line when delete button is clicked', async () => {
-  //   const { getByText, getAllByText } = render(
-  //     <MemoryRouter>
-  //       <ListLine />
-  //     </MemoryRouter>
-  //   );
-
-  //   await act(async () => {
-  //   const deleteButtons = getByText('Eliminar');
-  //   fireEvent.click(deleteButtons);
-  //   await waitFor(() => {
-  //     expect(LineService.remove).toHaveBeenCalledWith(1);
-  //   });
-  // });
-  // });
-
   it('navigates to update page when update button is clicked', async () => {
-
     const { getByAltText } = render(
       <MemoryRouter>
         <ListLine />

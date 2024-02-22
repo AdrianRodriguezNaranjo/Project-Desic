@@ -81,4 +81,4 @@ const ScheduleList = () => {
   )
 }
 
-export default ScheduleList
+export default ScheduleList;
