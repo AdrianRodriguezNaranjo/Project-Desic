@@ -5,7 +5,7 @@ class Bus_User
 {
 public:
     long           id;
-    QString        username;
+    QString        email;
     QString        password;
     QString        name;
     QString        discriminator;

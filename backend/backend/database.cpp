@@ -62,9 +62,9 @@ bool Database::createLineTable()
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS bus_user ("
                     "id SERIAL PRIMARY KEY,"
-                    "username VARCHAR(255),"
-                    "password VARCHAR(255),"
                     "name VARCHAR(255),"
+                    "password VARCHAR(255),"
+                    "email VARCHAR(255),"
                     "discriminator VARCHAR(255)"
                     ")")) {
         qDebug() << "Error: Failed to create the bus_user table:" << query.lastError().text();

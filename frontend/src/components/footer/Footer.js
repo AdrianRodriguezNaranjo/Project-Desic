@@ -9,7 +9,7 @@ function Footer() {
 
   const confirm = () => {
     message.success('Se ha cerrado sesion');
-    window.location.reload();
+    navigate('/');
   };
   const cancel = (e) => {
     console.log(e);

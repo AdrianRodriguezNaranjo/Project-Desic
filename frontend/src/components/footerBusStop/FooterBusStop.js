@@ -4,17 +4,18 @@ import user from '../../assets/icons/user.svg';
 import bus from '../../assets/icons/bus.svg';
 import hour from '../../assets/icons/hour.svg';
 import chat from '../../assets/icons/chat.svg';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { message, Popconfirm } from 'antd';
 
 function FooterBusStop() {
   const navigate = useNavigate();
   const { idLine } = useParams();
+  const location = useLocation();
   // const [selectedIcon, setSelectedIcon] = useState('');
 
   const confirm = () => {
     message.success('Se ha cerrado sesion');
-    window.location.reload();
+    navigate('/');
   };
 
   const cancel = (e) => {
@@ -22,7 +23,8 @@ function FooterBusStop() {
     message.error('Cancelado');
   };
 
-  const handleIconClick = (icon) => { 
+  const handleIconClick = (icon) => {
+    const { pathname } = location;
     if (icon === 'hour') {
       navigate(`/Line/${idLine}/schedule`);
       // setSelectedIcon(icon);
@@ -38,18 +40,39 @@ function FooterBusStop() {
     }
   };
 
+  const getMenuActiveItem = () => {
+    const { pathname } = location;
+
+    if (pathname === `/Line/${idLine}/schedule`) {
+      localStorage.removeItem('schoolId');
+      return 'hour';
+    } else if (pathname === `/Line/${idLine}/BusStop`) {
+      return 'bus';
+    } else if (pathname === `/Line/${idLine}/chat`) {
+      return 'chat';
+    }
+    return 'hour';
+  };
+
   return (
     <div className="bodyFooterSB">
       <div className={`icon`} onClick={() => handleIconClick('hour')}>
-        <img src={hour} alt="Horas" />
+        <div className={getMenuActiveItem() === 'hour' ? 'active' : ''}>
+          <img src={hour} alt="Horas" />
+        </div>
         <p>Horario</p>
       </div>
       <div className={`icon`} onClick={() => handleIconClick('bus')}>
-        <img src={bus} alt="Paradas" />
+        <div className={getMenuActiveItem() === 'bus' ? 'active' : ''}>
+          <img src={bus} alt="Paradas" />
+        </div>
         <p>Paradas</p>
+
       </div>
       <div className={`icon`} onClick={() => handleIconClick('chat')}>
-        <img src={chat} alt="chat" />
+        <div className={getMenuActiveItem() === 'chat' ? 'active' : ''}>
+          <img src={chat} alt="chat" />
+        </div>
         <p>Chat</p>
       </div>
       <Popconfirm
@@ -60,7 +83,7 @@ function FooterBusStop() {
         okText="Si"
         cancelText="No"
       >
-        <div className="icon">
+        <div className="iconuser">
           <img src={user} alt="Usuario" />
           <p>Usuario</p>
         </div>
