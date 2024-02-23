@@ -2,8 +2,8 @@ import ScheduleService from "../../services/scheduleService/ScheduleService";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { Button, notification, Space } from "antd";
-import FooterSchedule from "../footerSchedule/FooterSchedule";
 import HeaderSchedule from "../headerSchedule/HeaderSchedule";
+import FooterBusStop from "../footerBusStop/FooterBusStop";
 
 const AddSchedule = () => {
   const [api, contextHolder] = notification.useNotification();
@@ -60,7 +60,7 @@ const AddSchedule = () => {
           </Button>
         </form>
       </div>
-      <FooterSchedule />
+      <FooterBusStop />
     </div>
   )
 
