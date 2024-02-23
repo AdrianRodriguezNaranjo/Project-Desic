@@ -29,6 +29,12 @@
     z-index: 20;
 }
 
+.report {
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    margin-right: 10%;
+  }
 
 .pageTitle {
     display: flex;
