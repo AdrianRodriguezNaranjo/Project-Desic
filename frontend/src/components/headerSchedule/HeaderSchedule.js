@@ -21,7 +21,7 @@ function HeaderSchedule() {
         <h1>Horas</h1>
       </div>
       <div className='report'>
-      <FilePdfOutlined onClick={onClick} />
+      {/* <FilePdfOutlined onClick={onClick} /> */}
       </div>
       <div className='helpHeader'>
       <a href="/documentos_de_ayuda/Project-Desic.html" target="Blank">
