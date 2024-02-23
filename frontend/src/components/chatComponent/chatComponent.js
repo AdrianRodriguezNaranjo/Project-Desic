@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './chatComponent.css';
 
 const WebSocket = window.WebSocket || window.MozWebSocket; // Asegurarse de tener la clase WebSocket disponible
 
@@ -45,7 +46,8 @@ const ChatComponent = () => {
   };
 
   return (
-    <div>
+    <div className='endofthepage'>
+    <div className='listBody'>
       <div style={{ marginBottom: '10px' }}>
         <input
           type="text"
@@ -63,6 +65,7 @@ const ChatComponent = () => {
           ))}
         </ul>
       </div>
+    </div>
     </div>
   );
 };

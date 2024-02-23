@@ -1,0 +1,52 @@
+.endofthepage {
+  width: 100%;
+  margin: 0 auto; /* Centra el chat en la página */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el cuerpo del chat */
+.listBody {
+  background-color: #f5f0f6;
+  border: 1px solid #f5f0f6;
+  border-radius: 25px;
+  padding-top: 120px;
+  padding-bottom: 70px;
+}
+
+/* Estilos para el input y el botón de enviar */
+.listBody input[type="text"] {
+  width: calc(100% - 70px); /* Ajusta el ancho del input para que quepa el botón */
+  padding: 10px;
+  border: 1px solid #f5f0f6;
+  border-radius: 5px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.listBody button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #FFFD82;
+  color: #32292F;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.listBody button:hover {
+  background-color: #FFFD82;
+}
+
+/* Estilos para los mensajes */
+.listBody ul {
+  margin: 0;
+  padding: 0;
+}
+
+.listBody li {
+  background-color: #f5f0f6;
+  border: 1px solid #32292F;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
