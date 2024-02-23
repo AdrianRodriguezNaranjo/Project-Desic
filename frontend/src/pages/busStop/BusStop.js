@@ -2,16 +2,15 @@ import BusStopList from "../../components/busStopList/BusStopList";
 import FooterBusStop from "../../components/footerBusStop/FooterBusStop";
 import HeaderBusStop from "../../components/headerBusStop/HeaderBusStop";
 
+function BusStop() {
 
-function BusStop(){
-
-    return(
-        <div className='menuBody'>
-        <HeaderBusStop/>
-        <BusStopList/>
-        <FooterBusStop/>
-        </div>
-    );
+  return (
+    <div className='menuBody'>
+      <HeaderBusStop />
+      <BusStopList />
+      <FooterBusStop />
+    </div>
+  );
 }
 
-export default BusStop
+export default BusStop;

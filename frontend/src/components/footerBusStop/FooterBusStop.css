@@ -1,45 +1,86 @@
 .bodyFooterSB {
-    background-color: #32292F;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 10%;
-    bottom: 0;
-    position: fixed;
-    z-index: 100;
-    border-radius: 30px 30px 0 0;
+  background-color: #32292F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  position: fixed;
+  z-index: 100;
+  border-radius: 30px 30px 0 0;
+  color: #f5f0f6;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 8rem;
+  color: #f5f0f6;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.icon p {
+  position: fixed;
+  margin-bottom: 0;
+}
+
+.icon img {
+  transform: translateY(-10px);
+  width: 100%;
+}
+
+.iconuser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50%;
+  padding: 0.5rem;
+  width: 8rem;
+  color: #f5f0f6;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.iconuser p {
+  margin: 0;
+}
+
+.iconuser img {
+  width: 30%;
+}
+
+.icon .active {
+  background: #FE4A49;
+  border-radius: 50%;
+  transform: translateY(-30px); 
+  width: 15vw;
+  height: 15vh;
+  padding: 5px;
+}
+
+.icon .active img{
+  transform: translateY(3px);
+}
+
+@media (min-width: 768px) {
+  .icon .active {
+    background: #FE4A49;
+    border-radius: 50%;
+    transform: translateY(-50px); 
+    width: 5vw;
+    height: 10vh;
+    padding: 5px;
   }
   
-  .busstopHour {
-    display: table-column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
+  .icon .active img{
+    transform: translateY(3px);
   }
-  
-  .busstopBus {
-    display: table-column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
-  }
-  
-  .busstopUser {
-    display: table-column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 3px;
-    width: 33%;
-    height: 100%;
-    /* border: 2px solid black; */
-  }
+}

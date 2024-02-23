@@ -15,13 +15,14 @@ import RegisterForm from "./components/registerForm/RegisterForm";
 // import WelcomePage from "./components/welcomePage/WelcomePage";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginForm />} />
         {/* <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} /> */}
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/Line/:idLine/chat" element={<Chat />} />
         <Route path="/Line" element={<Lines />} />
         <Route path='/Line/:idLine/schedule' element={<Schedule />} />
         <Route path="/Line/:idLine/addSchedule" element={<AddSchedule />} />
