@@ -44,7 +44,6 @@ function FooterBusStop() {
     const { pathname } = location;
 
     if (pathname === `/Line/${idLine}/schedule`) {
-      localStorage.removeItem('schoolId');
       return 'hour';
     } else if (pathname === `/Line/${idLine}/BusStop`) {
       return 'bus';

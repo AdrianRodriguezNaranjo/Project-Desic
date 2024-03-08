@@ -32,9 +32,12 @@ SOURCES += \
     bus_user.cpp \
     chatserver.cpp \
     database.cpp \
-    http_server.cpp \
     line.cpp \
     main.cpp \
+    routes_bus_stop.cpp \
+    routes_line.cpp \
+    routes_schedule.cpp \
+    routes_user.cpp \
     schedule.cpp \
     user_lines.cpp
 
@@ -44,9 +47,12 @@ HEADERS += \
     chatserver.h \
     database.h \
     export.h \
-    http_server.h \
     line.h \
     precompiled.h \
+    routes_bus_stop.h \
+    routes_line.h \
+    routes_schedule.h \
+    routes_user.h \
     schedule.h \
     user_lines.h
 

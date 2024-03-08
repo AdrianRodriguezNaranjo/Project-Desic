@@ -1,13 +1,11 @@
 import back from '../../assets/icons/back.svg';
 import help from '../../assets/icons/help.svg';
 import { useNavigate } from 'react-router-dom';
-import ReportService from "../../services/report/report.service";
-import { FilePdfOutlined } from '@ant-design/icons';
 
 function HeaderChat() {
-  const onClick = (e) => {
-    ReportService();
-  };
+  // const onClick = (e) => {
+  //   ReportService();
+  // };
   const navigate=useNavigate()
   return (
     <div className="bodyHeader">

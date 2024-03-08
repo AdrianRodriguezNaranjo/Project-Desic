@@ -31,17 +31,22 @@ z-index: 10;
     margin-top: 10px;
     margin-bottom: 10px;
     color: white;
+    height: 25vh;
 }
 
 .textContainer {
-    flex: 1; /* La primera columna ocupa todo el espacio disponible */
-    padding: 5px; /* Ajustar el espacio interior */
-    width: 50%;
-  }
+  flex: 1; /* La primera columna ocupa todo el espacio disponible */
+  padding: 5px; /* Ajustar el espacio interior */
+  width: 50%;
+  text-align: center; /* Centrar el texto */
+  padding-left: 20px; /* Agregar espacio a la izquierda */
+  border: 30px;
+}
 
 .elementBody > * {
     width: 100%; /* Asegura que los elementos ocupen todo el ancho */
     padding: 10px; /* Ajusta el espacio entre elementos */
+    text-align: center;
   }
   
   .buttonContainer {
@@ -50,6 +55,7 @@ z-index: 10;
     justify-content: flex-start; /* Alinear los botones en la parte superior */
     align-items: flex-end; /* Alinear los botones a la derecha */
     padding: 10px; /* Ajustar el espacio interior */
+    max-width: 50px;
   }
 
 .elementBody>button{
