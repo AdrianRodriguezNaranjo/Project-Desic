@@ -3,11 +3,17 @@ import { act, render, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AddLine from './AddLine';
 import LineService from '../../services/linesServices/LineService';
+import ReportService from "../../services/report/report.service";
 
 jest.mock('../../services/linesServices/LineService', () => ({
   getAll: jest.fn(),
   create: jest.fn(),
 }));
+
+
+jest.mock('../../services/report/report.service', () => {
+  ReportService: "../../assets/report.pdf"
+});
 
 describe('AddLine', () => {
   afterEach(() => {

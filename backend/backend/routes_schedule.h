@@ -1,5 +1,5 @@
-#ifndef HTTP_SERVER_H
-#define HTTP_SERVER_H
+#ifndef ROUTES_SCHEDULE_H
+#define ROUTES_SCHEDULE_H
 
 #include <QCoreApplication>
 #include <QSqlError>
@@ -13,13 +13,11 @@
 #include <QHttpServerRequest>
 #include <QHttpServerResponse>
 #include <QSqlQuery>
-#include "line.h"
-#include "database.h"
 
-class HttpServer
+class Routes_Schedule
 {
 public:
-    static void startServer();
+    static void setupRoutes(QHttpServer& httpServer);
 };
 
-#endif // HTTP_SERVER_H
+#endif // ROUTES_LINE_H
